@@ -32,58 +32,39 @@ const formItemLayout = {
 export default function ModalInsert() {
   const ctx = useContext(CrimeWorkerContext);
   const { Text, Title } = Typography;
+  const getBase64 = (file, cb) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+        cb(reader.result)
+    };
+    reader.onerror = function (error) {
+        console.log('Error: ', error);
+    };
+}
 
   const pictureprops = {
     showUploadList: false,
     name: "file",
     multiple: false,
-    action: `${myUtil.apinodeserver}/upload/img `,
-    onChange(info) {
-      const { status } = info.file;
-      if (status !== "uploading") {
-      }
-      if (status === "done") {
-        ctx.changeStateValue("pht", info.file.response?.result);
-        message.success(`Амжилттай: ${info.file.name} .`);
-      } else if (status === "error") {
-        message.error(`${info.file.name} файл серверт илгээж чадсангүй.`);
-      }
-    },
-    onDrop(e) {
-      console.log("Dropped files", e.dataTransfer.files);
-    },
+    // action: `${myUtil.apinodeserver}/upload/img `,
+    // onChange(info) {
+    //   const { status } = info.file;
+    //   if (status !== "uploading") {
+    //   }
+    //   if (status === "done") {
+    //     ctx.changeStateValue("pht", info.file.response?.result);
+    //     message.success(`Амжилттай: ${info.file.name} .`);
+    //   } else if (status === "error") {
+    //     message.error(`${info.file.name} файл серверт илгээж чадсангүй.`);
+    //   }
+    // },
+    // onDrop(e) {
+    //   console.log("Dropped files", e.dataTransfer.files);
+    // },
+    beforeUpload: async (file) => {await getBase64(file, (value) => {    ctx.changeStateValue("pht", value); });         }
   };
-  const props = {
-    showUploadList: false,
-    name: "file",
-    multiple: true,
-    action: `${myUtil.apinodeserver}/upload/file `,
-    onChange(info) {
-      const { status } = info.file;
-      if (status !== "uploading") {
-        message.success(`Файл хавсаргаж байна`);
-      }
-      if (status === "done") {
-        let uploadfiles = ctx.state.uploadfiles;
-        uploadfiles.push({
-          bucket: "upload",
-          name: info.file.response?.result,
-          oldname: info.file.name,
-          filetype: info.file.type,
-          filesize: info.file.size,
-          lastModified: info.file.lastModified,
-        });
-
-        ctx.changeStateValue("uploadfiles", uploadfiles);
-        message.success(`Амжилттай: ${info.file.name}`);
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-    onDrop(e) {
-      console.log("Dropped files", e.dataTransfer.files);
-    },
-  };
+  
 
   return (
     <Modal
@@ -114,13 +95,14 @@ export default function ModalInsert() {
       <Spin spinning={ctx.state.loadingSave}>
         {ctx.state.id == null ? (
           <Title type="success" level={4}>
-            Хяналт-шинжилгээ, үнэлгээний ажилтнуудын судалгаа
+            Тоног төхөөрөмж бүртгэх
           </Title>
         ) : (
           <Title type="warning" level={4}>
-            Хяналт-шинжилгээ, үнэлгээний ажилтнуудын судалгаа ЗАСВАРЛАХ
+       Тоног төхөөрөмжийн бүртгэл засварлах
           </Title>
         )}
+        <Input value={ctx.state.pht}/>
         <Form {...formItemLayout} size="small">
           <Row gutter={16}>
             <Col span={12}>
@@ -129,7 +111,7 @@ export default function ModalInsert() {
                   {ctx.state.pht != null ? (
                     <Image
                       height={90}
-                      src={`${myUtil.apicdnserver}/image/${ctx.state.pht}`}
+                      src={ctx.state.pht}
                     />
                   ) : (
                     <Image height={90} src={noavatar} />
@@ -146,7 +128,7 @@ export default function ModalInsert() {
                 <Col span={6}>
                   <Form.Item
                     style={{ marginBottom: "5px" }}
-                    label="Анги"
+                    label="Нэгж"
                     required
                     hasFeedback
                     validateStatus={ctx.state.sqd != null ? "success" : "error"}

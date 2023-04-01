@@ -10,7 +10,7 @@ export default function SettingsGird() {
   const ctxAccount = useContext(AccountContext);
   return (
     <div>
-        <MyHeader/>
+      
       <div>
   
         <div
