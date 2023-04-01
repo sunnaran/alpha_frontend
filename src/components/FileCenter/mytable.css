@@ -1,0 +1,10 @@
+table,
+th,
+tr {
+  border: 1px solid #dddddd;
+}
+tr:hover {
+  background-color: #ceddff;
+}
+td {
+}

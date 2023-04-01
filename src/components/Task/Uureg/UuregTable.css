@@ -1,0 +1,11 @@
+table,
+th,
+tr {
+}
+tr:hover {
+  background-color: #ceddff;
+}
+td,
+th {
+  border: 1px solid rgb(204, 201, 201);
+}

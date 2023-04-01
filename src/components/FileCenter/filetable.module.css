@@ -1,0 +1,9 @@
+.mynewcss {
+  width: "350px";
+  background-color: red;
+  overflow-x: scroll;
+}
+
+.device-information td.longWord {
+  word-break: break-all;
+}
