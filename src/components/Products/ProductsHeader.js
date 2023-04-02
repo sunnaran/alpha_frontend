@@ -25,13 +25,13 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 
-import CrimeWorkerContext from "./CrimeWorkerContext";
+import ProductsContext from "./ProductsContext";
 const { Option } = Select;
 const { Search } = Input;
 
-export default function CrimeWorkerHeader() {
+export default function ProductsHeader() {
   
-  const ctx = useContext(CrimeWorkerContext);
+  const ctx = useContext(ProductsContext);
   return (
     <Layout style={{ backgroundColor: "#ceddff" }}>
       <Row>
@@ -45,20 +45,21 @@ export default function CrimeWorkerHeader() {
         >
           <Space style={{ height: "100%" }}>
             <Button
+              //  style={{display: "none"}}
               type="primary"
               size="small"
               onClick={() => {
                 ctx.changeStateValue("showInsert", true);
                 ctx.changeStateValue("isInsert", true);
                 ctx.changeStateValue("sqd", sessionStorage.getItem("sqd"));
-                ctx.getWorkers();
+                ctx.getBaraaniiTurul();
               }}
             >
               Нэмэх
             </Button>
 
             <span>
-              Тоног төхөөрөмж{" "}
+            Барааний нэрс{" "}
               {ctx.state.total_row > 0 && ` (${ctx.state.total_row})`}
             </span>
             {ctx.state.page_number > 1 && (

@@ -25,13 +25,13 @@ import {
   CloseOutlined,
 } from "@ant-design/icons";
 
-import CrimeWorkerContext from "./CrimeWorkerContext";
+import ShireeContext from "./ShireeContext";
 const { Option } = Select;
 const { Search } = Input;
 
-export default function CrimeWorkerHeader() {
+export default function ShireeHeader() {
   
-  const ctx = useContext(CrimeWorkerContext);
+  const ctx = useContext(ShireeContext);
   return (
     <Layout style={{ backgroundColor: "#ceddff" }}>
       <Row>
@@ -45,6 +45,7 @@ export default function CrimeWorkerHeader() {
         >
           <Space style={{ height: "100%" }}>
             <Button
+              //  style={{display: "none"}}
               type="primary"
               size="small"
               onClick={() => {
@@ -58,7 +59,7 @@ export default function CrimeWorkerHeader() {
             </Button>
 
             <span>
-              Тоног төхөөрөмж{" "}
+            Ширээний нэрс{" "}
               {ctx.state.total_row > 0 && ` (${ctx.state.total_row})`}
             </span>
             {ctx.state.page_number > 1 && (

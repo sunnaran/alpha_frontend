@@ -9,19 +9,33 @@ import SettingsGird from "../Settings/SettingsGrid";
 import CrimeWorkerGrid from "../../components/Crime/Worker/CrimeWorkerGrid"
 import { CrimeWorkerStore } from "../Crime/Worker/CrimeWorkerContext";
 import MyHeader from "../constcomponents/MyHeader";
+import ShireeGrid from "../Shiree/ShireeGrid";
+import {  ShireeStore } from "../Shiree/ShireeContext";
+import {  ProductsStore } from "../Products/ProductsContext";
 
+import ProductsGrid from "../Products/ProductsGrid";
+import QrmenuGrid from "../QRmenu/QrmenuGrid";
 function App() {
   const { token, setToken } = useToken();
   if (!token) {
-    return <Login setToken={setToken} />;
-  }
+    return <>
+     <Routes>  
+        <Route path="/qrmenu/:id" element={<QrmenuGrid/>} />           
+        <Route path="*" element={ <Login setToken={setToken}/> }/>
+      </Routes>
+    </>
+  
+  } 
+  else 
   return (
     <>
     <MyHeader/>
-      <Routes>
+        <Routes>
         <Route path="/" element={<Preferences />} />
-        <Route path="/baraa" element={<Preferences />} />
-        <Route
+        <Route path="/baraa" element={<ProductsStore><ProductsGrid/></ProductsStore>} />
+        <Route path="/shiree" element={<ShireeStore><ShireeGrid /></ShireeStore>} />
+        <Route path="/qrmenu/:id" element={<QrmenuGrid/>} />
+             <Route
           path="/user"
           element={
             <AccountStore>
@@ -30,6 +44,8 @@ function App() {
           }
         />
         <Route path="/tonog" element={<div><CrimeWorkerStore><CrimeWorkerGrid/></CrimeWorkerStore></div>} />
+        {!token && <Route path="*" element={ <Login setToken={setToken}/> }/>}
+        <Route path="*" element={<Preferences />} />
       </Routes>
     </>
   );

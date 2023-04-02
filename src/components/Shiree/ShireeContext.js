@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { message } from "antd";
-import axios from "../../../util/myAxios";
-const CrimeWorkerContext = React.createContext();
+import axios from "../../util/myAxios";
+const ShireeContext = React.createContext();
 const initialState = {
   //data
   dataList: [],
@@ -16,7 +16,10 @@ const initialState = {
   error: false,
   errorMessage: null,
   // БҮРТГЭЛ НЭМЭХ, ЗАСАХ
-  wrks: [{"id": "10", "name":"naraa"}, {"id": "11", "name":"saraa"}],
+  wrks: [],
+  ngj: null,
+  nme: null,
+  sts: null,
   eid: null,
   enm: null,
   id: null,
@@ -44,7 +47,7 @@ const initialState = {
   total_page: null,
 };
 
-export const CrimeWorkerStore = (props) => {
+export const ShireeStore = (props) => {
   const [state, setState] = useState(initialState);
   const changeStateValue = (name, value) => {
     setState((state) => ({ ...state, [name]: value }));
@@ -53,11 +56,8 @@ export const CrimeWorkerStore = (props) => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
     if (
       state.nme == null ||
-      state.sts == null ||
-      state.too == null ||
-      state.une == null ||
-      state.eid == null ||
-      state.enm == null 
+      state.ngj == null ||
+      state.sts == null  
     ) {
       message.error("Талбаруудыг гүйцэт бөглөнө үү");
       return;
@@ -67,20 +67,15 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105001,
+        request_code: 123001,
       },
     };
    
     const data = {
       token,
       id: state.id,
-      pht: state.pht,
       nme: state.nme,
-      sts: state.sts,
-      too: state.too,
-      une: state.une,
-      eid: state.eid,
-      enm: state.enm,
+      ngj: state.ngj, 
         };
 
     axios
@@ -114,7 +109,7 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105000,
+        request_code: 123000,
       },
     };
     const data = {
@@ -173,7 +168,7 @@ export const CrimeWorkerStore = (props) => {
       })
       .catch((error) => {
         changeStateValue("loadingData", false);
-        message.info("Алдаа гарлаа: code is 105000");
+        message.info("Алдаа гарлаа: code is 123000");
       });
   };
 
@@ -184,7 +179,7 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105000,
+        request_code: 123000,
       },
     };
     const data = {
@@ -192,11 +187,11 @@ export const CrimeWorkerStore = (props) => {
       page_size: state.page_size,
       page_number: state.page_number,
       nme: state.nme,
-      une: state.une,
-      too: state.too,
-      nune: state.nune,
+      ngj: state.ngj,
+      rng: state.rng,
+
       sts: state.sts,
-      enm: state.enm, 
+      
       usr: state.usr,
       cdt: state.cdt, 
     };
@@ -230,7 +225,7 @@ export const CrimeWorkerStore = (props) => {
       })
       .catch((error) => {
         changeStateValue("loadingData", false);
-        message.info("Алдаа гарлаа: code is 105000");
+        message.info("Алдаа гарлаа: code is 123000");
       });
   };
 
@@ -240,7 +235,7 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105003,
+        request_code: 123003,
       },
     };
     const data = {
@@ -351,7 +346,7 @@ export const CrimeWorkerStore = (props) => {
     }));
   };
   return (
-    <CrimeWorkerContext.Provider
+    <ShireeContext.Provider
       value={{
         state,
         changeStateValue,
@@ -366,7 +361,7 @@ export const CrimeWorkerStore = (props) => {
       }}
     >
       {props.children}
-    </CrimeWorkerContext.Provider>
+    </ShireeContext.Provider>
   );
 };
-export default CrimeWorkerContext;
+export default ShireeContext;

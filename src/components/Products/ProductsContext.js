@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { message } from "antd";
-import axios from "../../../util/myAxios";
-const CrimeWorkerContext = React.createContext();
+import axios from "../../util/myAxios";
+const ProductsContext = React.createContext();
 const initialState = {
   //data
   dataList: [],
@@ -16,35 +16,27 @@ const initialState = {
   error: false,
   errorMessage: null,
   // БҮРТГЭЛ НЭМЭХ, ЗАСАХ
-  wrks: [{"id": "10", "name":"naraa"}, {"id": "11", "name":"saraa"}],
-  eid: null,
-  enm: null,
+  trl_list: [],
+  trl: null,
+  nme: null,
+  pht: null,
+  ngj: null,
+  jin: null,
   id: null,
-  sqd: null,
-  doc: null,
-  ltp: null,
-  lnm: null,
-  mnt: null,
-  tip: null,
-  cnt: null,
-  ntr: null,
-  imp: null,
-  hrs: null,
+  sts: null, 
   usr: null,
-  cdt: null,
-  uploadfiles: [],
+  cdt: null,  
   filter: false,
-
   //Pagination
   page_number: 1,
-  page_size: 100,
+  page_size: 200,
   total_row: null,
   start_row: null,
   end_row: null,
   total_page: null,
 };
 
-export const CrimeWorkerStore = (props) => {
+export const ProductsStore = (props) => {
   const [state, setState] = useState(initialState);
   const changeStateValue = (name, value) => {
     setState((state) => ({ ...state, [name]: value }));
@@ -52,12 +44,8 @@ export const CrimeWorkerStore = (props) => {
   const onSaveOrUpdate = () => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
     if (
-      state.nme == null ||
-      state.sts == null ||
-      state.too == null ||
-      state.une == null ||
-      state.eid == null ||
-      state.enm == null 
+      state.trl == null  ||  
+      state.nme == null      
     ) {
       message.error("Талбаруудыг гүйцэт бөглөнө үү");
       return;
@@ -67,7 +55,7 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105001,
+        request_code: 124001,
       },
     };
    
@@ -75,12 +63,10 @@ export const CrimeWorkerStore = (props) => {
       token,
       id: state.id,
       pht: state.pht,
+      trl: state.trl,
       nme: state.nme,
-      sts: state.sts,
-      too: state.too,
-      une: state.une,
-      eid: state.eid,
-      enm: state.enm,
+      ngj: state.ngj,
+      jin: state.jin, 
         };
 
     axios
@@ -114,7 +100,7 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105000,
+        request_code: 124000,
       },
     };
     const data = {
@@ -123,25 +109,7 @@ export const CrimeWorkerStore = (props) => {
       page_number: 1,
     };
     setState((state) => ({
-      ...state,
-      id: null,
-      pht: null,
-      rnk: null,
-      lnm: null,
-      fnm: null,
-      pst: null,
-      bdt: null,
-      bpl: null,
-      edu: null,
-      occ: null,
-      sch: null,
-      yof: null,
-      wex: null,
-      adt: null,
-      usr: null,
-      cdt: null,
-      sqd: null,
-      hrs: null,
+      ...state,      
       filter: false,
       loadingData: true,
       page_number: 1,
@@ -173,7 +141,7 @@ export const CrimeWorkerStore = (props) => {
       })
       .catch((error) => {
         changeStateValue("loadingData", false);
-        message.info("Алдаа гарлаа: code is 105000");
+        message.info("Алдаа гарлаа: code is 123000");
       });
   };
 
@@ -184,19 +152,19 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105000,
+        request_code: 124000,
       },
     };
     const data = {
       token,
       page_size: state.page_size,
       page_number: state.page_number,
+      trln: state.trln,
+      trl: state.trl,
       nme: state.nme,
-      une: state.une,
-      too: state.too,
-      nune: state.nune,
+      ngj: state.ngj,
+      jin: state.jin,
       sts: state.sts,
-      enm: state.enm, 
       usr: state.usr,
       cdt: state.cdt, 
     };
@@ -230,7 +198,7 @@ export const CrimeWorkerStore = (props) => {
       })
       .catch((error) => {
         changeStateValue("loadingData", false);
-        message.info("Алдаа гарлаа: code is 105000");
+        message.info("Алдаа гарлаа: code is 124000");
       });
   };
 
@@ -240,7 +208,7 @@ export const CrimeWorkerStore = (props) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 105003,
+        request_code: 124003,
       },
     };
     const data = {
@@ -265,7 +233,7 @@ export const CrimeWorkerStore = (props) => {
         message.error("Алдаа гарлаа");
       });
   };
-  const getWorkers = () => {
+  const getBaraaniiTurul = () => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
     const configload = {
       headers: {
@@ -276,7 +244,7 @@ export const CrimeWorkerStore = (props) => {
     };
     const data = {
       token,
-      search_text: 'workers',
+      search_text: 'baraaniiturul',
     }; 
     axios
       .post("/public/request", data, configload)
@@ -290,7 +258,7 @@ export const CrimeWorkerStore = (props) => {
         
         setState((state) => ({
           ...state,
-          wrks:
+          trl_list:
             response.data.result.list != null ? response.data.result.list : [],
           
         }));
@@ -307,6 +275,11 @@ export const CrimeWorkerStore = (props) => {
       ...state,
       showInsert: true,
       id: el.id,
+      pht: el.pht,
+      nme: el.nme,
+      ngj: el.ngj,
+      jin: el.jin,
+      trl: el.trl,
       pht: el.pht,
       rnk: el.rnk,
       lnm: el.lnm,
@@ -348,10 +321,15 @@ export const CrimeWorkerStore = (props) => {
       cdt: null,
       sqd: null,
       hrs: null,
+      ngj: null,
+      trl: null,
+      jin: null,
+      sts: null,
+
     }));
   };
   return (
-    <CrimeWorkerContext.Provider
+    <ProductsContext.Provider
       value={{
         state,
         changeStateValue,
@@ -362,11 +340,11 @@ export const CrimeWorkerStore = (props) => {
         deleteData,
         openUpdate,
         closeModal,
-        getWorkers
+        getBaraaniiTurul
       }}
     >
       {props.children}
-    </CrimeWorkerContext.Provider>
+    </ProductsContext.Provider>
   );
 };
-export default CrimeWorkerContext;
+export default ProductsContext;

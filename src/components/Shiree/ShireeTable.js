@@ -1,16 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { Input, Select, Menu, Modal, Dropdown, Image, Space, Button} from "antd";
-import DownloadFile from "../../constcomponents/DownloadFile";
-import MyEllipsis from "../../constcomponents/MyEllipsis";
-import CrimeWorkerContext from "./CrimeWorkerContext";
-import myUtil from "../../../util/myUtil";
-import * as myConst from "../../../MyConstant"; 
-import noavatar from "../../../assets/no_avatar.jpg";
+import DownloadFile from "../constcomponents/DownloadFile";
+import MyEllipsis from "../constcomponents/MyEllipsis";
+import ShireeContext from "./ShireeContext";
+import myUtil from "../../util/myUtil";
+import * as myConst from "../../MyConstant"; 
+import noavatar from "../../assets/no_avatar.jpg";
 
 import { EditOutlined, DeleteOutlined , ExclamationCircleOutlined } from "@ant-design/icons";
 const { confirm } = Modal;
-export default function CrimeWorkerTable() {
-  const ctx = useContext(CrimeWorkerContext);
+export default function ShireeTable() {
+  const ctx = useContext(ShireeContext);
   useEffect(() => {
     ctx.loadAllData();
   }, []);
@@ -63,7 +63,7 @@ export default function CrimeWorkerTable() {
           <tr> <td>
               <div style={{ maxWidth: "50px", width: "50px" }} />
             </td>
-            <td>
+            <td style={{display: "none"}}>
               <div style={{ maxWidth: "50px", width: "50px" }} />
             </td>
             <td>
@@ -87,23 +87,34 @@ export default function CrimeWorkerTable() {
             <td>
               <div style={{ maxWidth: "100px", width: "100px" }} />
             </td>
-            <td>
-              <div style={{ maxWidth: "100px", width: "100px" }} />
-            </td>
+         
           </tr>
           <tr> <td> </td>
-            <td>Зураг</td>
+            <td style={{display: "none"}}>Зураг</td>
+            <td>Нэгж</td>
             <td>Нэр</td>
-            <td>Үнэ</td>
-            <td>Тоо</td>
-            <td>Нийт үнэ</td>
-            <td>Хариуцагч</td>
-            <td>Төлөв</td>
+            <td>QR менюн код үүсгэх</td>
+            <td>Хонх</td>
+            <td>Төлөв</td>  
             <td>Бүртгэсэн</td>
             <td>Огноо</td>
           </tr>
           <tr> <td></td>
-            <td></td>
+          <td style={{display: "none"}}></td>
+            
+            <td>
+              <Input
+                value={ctx.state.ngj}
+                style={{ margin: "0px", padding: "0px" }}
+                onChange={(event) =>
+                  ctx.changeStateValue("ngj", event.target.value)
+                }
+                onPressEnter={() => {
+                  ctx.changeStateValue("filter", true);
+                  ctx.filterData();
+                }}
+              />
+            </td>
             <td>
               <Input
                 value={ctx.state.nme}
@@ -119,21 +130,8 @@ export default function CrimeWorkerTable() {
             </td>
             <td>
               <Input
-                value={ctx.state.une}
-                style={{ margin: "0px", padding: "0px" }}
-                onChange={(event) =>
-                  ctx.changeStateValue("une", event.target.value)
-                }
-                onPressEnter={() => {
-                  ctx.changeStateValue("filter", true);
-                  ctx.filterData();
-                }}
-              />
-            </td>
-            <td>
-              <Input
                 value={ctx.state.too}
-                style={{ margin: "0px", padding: "0px" }}
+                style={{ margin: "0px", padding: "0px", display: "none" }}
                 onChange={(event) =>
                   ctx.changeStateValue("too", event.target.value)
                 }
@@ -145,23 +143,10 @@ export default function CrimeWorkerTable() {
             </td>
             <td>
               <Input
-                value={ctx.state.nune}
+                value={ctx.state.rng}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
-                  ctx.changeStateValue("nune", event.target.value)
-                }
-                onPressEnter={() => {
-                  ctx.changeStateValue("filter", true);
-                  ctx.filterData();
-                }}
-              />
-            </td>
-            <td>
-              <Input
-                value={ctx.state.enm}
-                style={{ margin: "0px", padding: "0px" }}
-                onChange={(event) =>
-                  ctx.changeStateValue("enm", event.target.value)
+                  ctx.changeStateValue("rng", event.target.value)
                 }
                 onPressEnter={() => {
                   ctx.changeStateValue("filter", true);
@@ -185,7 +170,7 @@ export default function CrimeWorkerTable() {
             <td>
               <Input
                 value={ctx.state.usr}
-                style={{ margin: "0px", padding: "0px" }}
+                style={{ margin: "0px", padding: "0px", display: "none" }}
                 onChange={(event) =>
                   ctx.changeStateValue("usr", event.target.value)
                 }
@@ -195,7 +180,6 @@ export default function CrimeWorkerTable() {
                 }}
               />
             </td>
-            
             <td>
               <Input
                 value={ctx.state.cdt}
@@ -209,6 +193,8 @@ export default function CrimeWorkerTable() {
                 }}
               />
             </td>
+            
+            
           </tr>
         </thead>
         <tbody>
@@ -216,7 +202,7 @@ export default function CrimeWorkerTable() {
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr>
               <td><Space> <Button  onClick={() => ctx.openUpdate(el)} size="small" shape="circle" icon={<EditOutlined />} /> <Button size="small" onClick={() => showDeleteConfirm(el.id)} shape="circle" icon={<DeleteOutlined />} /></Space></td>
-                <td>
+              <td style={{display: "none"}}>
                   {el.pht != null ? (
                     <Image
                       height={40}
@@ -227,23 +213,21 @@ export default function CrimeWorkerTable() {
                   )}
                 </td>
                 <td>
+                  <MyEllipsis row={2}>{el.ngj}</MyEllipsis>
+                </td>
+                <td>
                   <MyEllipsis row={2}>{el.nme}</MyEllipsis>
                 </td>
                 <td>
-                  <MyEllipsis row={2}>{el.une}</MyEllipsis>
+                  <a href={'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data='+el.qrurl+el.qrid} target="_blank">QR код үүсгэх</a>
                 </td>
                 <td>
-                  <MyEllipsis row={2}>{el.too}</MyEllipsis>
-                </td>
-                <td>
-                  <MyEllipsis row={2}>{el.too*el.une}</MyEllipsis>
-                </td>
-                <td>
-                  <MyEllipsis row={2}>{el.enm}</MyEllipsis>
+                  <MyEllipsis row={2}>{el.rng}</MyEllipsis>
                 </td>
                 <td>
                   <MyEllipsis row={2}>{el.sts}</MyEllipsis>
                 </td>
+             
                 <td>
                   <MyEllipsis row={2}>{el.usr}</MyEllipsis>
                 </td>

@@ -18,11 +18,10 @@ import {
 
 import { DeleteOutlined, FileOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
-import moment from "moment";
-import myUtil from "../../../util/myUtil";
-import noavatar from "../../../assets/no_avatar.jpg";
-import CrimeWorkerContext from "./CrimeWorkerContext";
-import * as myConst from "../../../MyConstant";
+import moment from "moment"; 
+import noavatar from "../../assets/no_avatar.jpg";
+import ShireeContext from "./ShireeContext";
+import * as myConst from "../../MyConstant";
 const dateFormat = "YYYY/MM/DD";
 const { TextArea } = Input;
 const { Dragger } = Upload;
@@ -34,7 +33,7 @@ export default function ModalInsert() {
    ctx.getWorkers();
   }, [])
   
-  const ctx = useContext(CrimeWorkerContext);
+  const ctx = useContext(ShireeContext);
   const { Text, Title } = Typography;
   const getBase64 = (file, cb) => {
     let reader = new FileReader();
@@ -100,18 +99,18 @@ export default function ModalInsert() {
       <Spin spinning={ctx.state.loadingSave}>
         {ctx.state.id == null ? (
           <Title type="success" level={4}>
-            Тоног төхөөрөмж бүртгэх
+            Ширээ нэмэх
           </Title>
         ) : (
           <Title type="warning" level={4}>
-       Тоног төхөөрөмжийн бүртгэл засварлах
+       Ширээ засварлах
           </Title>
         )}
      
         <Form {...formItemLayout} size="small">
           <Row gutter={16}>
-            <Col span={24}>
-              <Row gutter={16}>
+            <Col span={24} >
+              <Row gutter={16}  style={{display: "none"}}>
                 <Col span={8}>
                   {ctx.state.pht != null ? (
                     <Image
@@ -131,8 +130,29 @@ export default function ModalInsert() {
                   </ImgCrop>
                 </Col>
               </Row>
+              
               <Row gutter={16}>             
                 <Col span={24}>
+                <Form.Item
+            style={{ marginBottom: "5px" }}
+            label="Нэгж"
+            required
+            hasFeedback
+            validateStatus={ctx.state.ngj != null ? "success" : "error"}
+          >
+            <Select
+              showSearch={true}
+              value={ctx.state.ngj}
+              onSelect={(value, event) => ctx.changeStateValue("ngj", value)}
+            >
+              {myConst.CONST_SQD.map((el) => (
+                <Select.Option key={el} value={el}>
+                  {el}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
                   <Form.Item
                     style={{ marginBottom: "5px" }}
                     required
@@ -150,86 +170,9 @@ export default function ModalInsert() {
                   </Form.Item>
                 </Col>
               </Row>
-              
-                  <Form.Item
-                    style={{ marginBottom: "5px" }}
-                    required
-                    label="Үнэ"
-                    hasFeedback
-                    validateStatus={ctx.state.une != null ? "success" : "error"}
-                  >
-                    <InputNumber
-                      style={{width: "200px"}}
                 
-                      allowClear
-                      value={ctx.state.une}
-                      onChange={(event) =>
-                        ctx.changeStateValue("une", event)
-                      }
-                    />
-                  </Form.Item>
-               
-                  <Form.Item
-                    style={{ marginBottom: "5px",  }}
-                    
-                    required
-                    label="Тоо"
-                    hasFeedback
-                    validateStatus={ctx.state.too != null ? "success" : "error"}
-                  >
-                    <InputNumber
-                    style={{width: "200px"}}
-                      allowClear
-                      value={ctx.state.too}
-                      onChange={(event) =>
-                        ctx.changeStateValue("too", event)
-                      }
-                    />
-                  </Form.Item>
-
                   
-                  <Form.Item
-                    style={{ marginBottom: "5px" }}
-                    label="Статус"
-                    required
-                    hasFeedback
-                    validateStatus={ctx.state.sts != null ? "success" : "error"}
-                  >
-                    <Select                     
-                      value={ctx.state.sts}
-                      onSelect={(value, event) =>
-                        ctx.changeStateValue("sts", value)
-                      }
-                    >
-                      {myConst.CONST_STATUS.map((el) => (
-                        <Select.Option key={el} value={el}>
-                          {el}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                  
-                  <Form.Item
-                    style={{ marginBottom: "5px" }}
-                    label="Хариуцах эзэн"
-                    required
-                    hasFeedback
-                    validateStatus={ctx.state.eid != null ? "success" : "error"}
-                  >
-                    <Select                     
-                      value={ctx.state.eid}
-                      onSelect={(value, event) =>
-                        {ctx.changeStateValue("eid", value); ctx.changeStateValue("enm", ctx.state.wrks.find((el)=>el.id==value)?.name) }
-                        
-                      }
-                    >
-                      {ctx.state.wrks.map((el) => (
-                        <Select.Option key={el.id}>
-                          {el.name}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
+              
                  
             </Col>
           </Row>

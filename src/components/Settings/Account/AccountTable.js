@@ -244,7 +244,7 @@ export default function AccountTable() {
 
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr>
-                <td><Space> <Button  onClick={() => ctx.openUpdate(el)} shape="circle" icon={<EditOutlined />} /> <Button onClick={() => showDeleteConfirm(el.id)} shape="circle" icon={<DeleteOutlined />} /></Space></td>
+                <td><Space> <Button  onClick={() => ctx.openUpdate(el)} shape="circle" size="small" icon={<EditOutlined />} /> <Button size="small" onClick={() => showDeleteConfirm(el.id)} shape="circle" icon={<DeleteOutlined />} /></Space></td>
               <td style={{display: "none"}}>
                   {el.pht != null ? (
                     <Image

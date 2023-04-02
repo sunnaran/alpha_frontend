@@ -6,6 +6,11 @@ export const CONST_RANK = [
   "Үндсэн ажилтан",
   "Туслах ажилтан",
 ];
+export const CONST_STATUS = [
+  "Байгаа",
+  "Байхгүй",
+];
+
 
 
 export const CONST_SQD_PORT = [
