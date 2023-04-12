@@ -56,8 +56,7 @@ export const ShireeStore = (props) => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
     if (
       state.nme == null ||
-      state.ngj == null ||
-      state.sts == null  
+      state.ngj == null  
     ) {
       message.error("Талбаруудыг гүйцэт бөглөнө үү");
       return;

@@ -31,6 +31,9 @@ export default function AntMenu() {
         lineHeight: "25px",
       }}
     >
+      <Menu.Item key="pos" icon={<AppstoreOutlined />}>
+        <Link to="/pos">ПОС</Link>
+      </Menu.Item>
       <Menu.Item key="huulga" icon={<AppstoreOutlined />}>
         <Link to="/huulga">Хуулга</Link>
       </Menu.Item>

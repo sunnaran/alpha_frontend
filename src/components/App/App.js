@@ -14,7 +14,8 @@ import {  ShireeStore } from "../Shiree/ShireeContext";
 import {  ProductsStore } from "../Products/ProductsContext";
 
 import ProductsGrid from "../Products/ProductsGrid";
-import QrmenuGrid from "../QRmenu/QrmenuGrid";
+import QrmenuGrid from "../QRmenu/QrmenuGrid"; 
+import PosGrid from "../../Page/Pos/PosGrid";
 function App() {
   const { token, setToken } = useToken();
   if (!token) {
@@ -29,9 +30,10 @@ function App() {
   else 
   return (
     <>
-    <MyHeader/>
+    
         <Routes>
         <Route path="/" element={<Preferences />} />
+        <Route path="/pos" element={<PosGrid />} />
         <Route path="/baraa" element={<ProductsStore><ProductsGrid/></ProductsStore>} />
         <Route path="/shiree" element={<ShireeStore><ShireeGrid /></ShireeStore>} />
         <Route path="/qrmenu/:id" element={<QrmenuGrid/>} />
@@ -47,6 +49,7 @@ function App() {
         {!token && <Route path="*" element={ <Login setToken={setToken}/> }/>}
         <Route path="*" element={<Preferences />} />
       </Routes>
+       
     </>
   );
 }

@@ -1,0 +1,10 @@
+img {
+    height: 40px;
+       -webkit-filter: drop-shadow(5px 5px 5px #666666);
+    filter: drop-shadow(5px 5px 5px #666666);
+  }
+ .testdata {
+    height: 40px;
+    -webkit-filter: drop-shadow(5px 5px 5px #666666);
+ filter: drop-shadow(5px 5px 5px #666666);
+} 
