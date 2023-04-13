@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 import logo from "../../assets/alphalogo.png";
-import "./posheader.module.css";
+import css from "./posheader.module.css";
 import {Link} from "react-router-dom";
 export default function PosHeader() {
   return (
@@ -10,7 +10,7 @@ export default function PosHeader() {
         <table>
           <tr>
             <td>
-              <img src={logo} />
+              <img src={logo} className={css.img1}/>
             </td>
             <td>
               <div style={{ background: "white", padding: "6px" }}>
