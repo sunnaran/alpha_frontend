@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { Row, Col } from "antd";
+import { Row, Col, Card, List } from "antd";
 import PosContext from "./PosContext";
 import {
   HomeOutlined,
@@ -19,42 +19,60 @@ export default function BaraaGrid() {
   }, []);
 
   return (
-    <div style={{width: "100%"}}>
+    <div style={{ width: "100%", height: "calc(100vh - 180px)" }}>
       <Row type="flex">
-        
         {ctx.state.baraaangilal.map((el) => (
-          <Col xs={12} sm={8} md={6} lg={4} xl={2}>
+          <Col xs={12} sm={8} md={6} lg={4} xl={2} key={el.id}>
+            <div
             
-          
-          <div style={{
-              marginRight: "15px",
-              background: "#F1EBF2",
-              padding: "10px",
-              margin: "5px",
-              borderRadius: "8px",
-              fontSize: "18px"
-              , fontWeight: "bold",
-              border: "1px solid #E5E5E7"
-            }}>
-            <table>
-              <tr>
-                <td>
-                  {/* <img src={el.pht} height={25} /> */}
-                </td>
-                <td>{el.name}</td>
-              </tr>
-            </table>
+              style={{
+                textAlign: "center",
+                marginRight: "15px",
+                background: "#F1EBF2",
+                padding: "10px",
+                margin: "5px",
+                borderRadius: "8px",
+                fontSize: "18px",
+                fontWeight: "bold",
+                border: "1px solid #E5E5E7",
+              }}
+              key={el.name}
+            >
+              <table>
+                <tr key={el.name}>
+                  <td>{/* <img src={el.pht} height={25} /> */}</td>
+                  <td>{el.name}</td>
+                </tr>
+              </table>
             </div>
           </Col>
         ))}
       </Row>
-      
-      <Row type="flex">
-      {ctx.state.baraanuud.map((el) => (
-        <Col xs={12} sm={8} md={6} lg={4} xl={2}><BaraaItem zurag={el.pht} une={el.une} ner={el.nme} /></Col>        
-      ))}
-      </Row>
-     
+
+      <div
+        style={{
+          overflow: "scroll",
+          height: "calc(100vh - 200px)",
+        }}
+      >
+        <List
+          grid={{
+            gutter: 16,
+            xs: 2,
+            sm: 3,
+            md: 4,
+            lg: 6,
+            xl: 8,
+            xxl: 10,
+          }}
+          dataSource={ctx.state.baraanuud}
+          renderItem={(item) => (
+            <List.Item>
+              <BaraaItem nme={item.nme} zurag={item.pht} une={item.une} />
+            </List.Item>
+          )}
+        />
+      </div>
     </div>
   );
 }
