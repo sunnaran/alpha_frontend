@@ -8,7 +8,7 @@ import BaraaGrid from "./BaraaGrid";
 
 const PosGrid = () => {
   return (
-    <div style={{ background: "#E8E7EA", height: "100vh" }}>
+    <div style={{ background: "#F2F2F2", height: "100vh" }}>
       <PosStore>
         <PosHeader />
         <Shiree />
