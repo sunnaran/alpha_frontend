@@ -7,17 +7,17 @@ import MyCurrency from "../../Function/MyCurrency";
 var currencyFormatter = require("currency-formatter");
 const OrderItem = (props) => {
   return (
-    <div>
+    <div style={{background: "#FBFCFF", margin: "10px", borderRadius: "10px", padding: "5px"}}>
       <Row align="middle">
         <Col flex="auto">
           <div style={{ fontSize: "20px" }}>
-            <MyEllipsisBlack>Өвчүүтэй цуйван</MyEllipsisBlack>
+            <MyEllipsisBlack>{props.itemname}</MyEllipsisBlack>
           </div>
-          <div style={{ fontSize: "20px", marginLeft: "20px" }}><span>2</span><span> x </span><span>15000</span></div>
+          <div style={{ fontSize: "20px", marginLeft: "20px" }}><span>{props.itemtoo}</span><span> x </span><span>{props.itemune}</span></div>
         </Col>
         <Col flex="100px">
           <div style={{ fontSize: "24px", fontWeight: "bold" }}>
-            <MyCurrency>10000000</MyCurrency>
+            <MyCurrency>{props.itemtoo*props.itemune}</MyCurrency>
           </div>
         </Col>
       </Row>
