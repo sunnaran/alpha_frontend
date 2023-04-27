@@ -11,11 +11,18 @@ const initialState = {
   end_row: null,
   total_page: null,
   loading: false,
+  //pos grid
+  loading: false,
+  order: null,
+  selectedOrderItem: null,
+  selectedTableId: null,
 
-};
+}; 
 
+ 
 export const PosStore = (props) => {
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(initialState); 
+  
   
 const getShiree = () => {
   const token = JSON.parse(sessionStorage.getItem("token"))?.token;
@@ -150,7 +157,7 @@ const changeStateValue = (name, value) => {
   return (
     <PosContext.Provider
       value={{
-        state,getShiree,getBaraa, getBaraaAngilal
+        state,getShiree,getBaraa, getBaraaAngilal, changeStateValue 
       }}
     >
       {props.children}

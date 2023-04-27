@@ -37,7 +37,7 @@ const PosGrid = () => {
 
                 }}
               >
-              <div style={{background: "yellow",  height: "calc(100vh - 240px)", overflowY:"scroll"  }}><OrderItem /></div>
+              <div style={{background: "gray",  height: "calc(100vh - 240px)", overflowY:"scroll"  }}><OrderItem /></div>
                 <div style={style}>
                    
                   <div style={{textAlign: "left", fontWeight: "bold"}}><MyCurrency>1000000</MyCurrency></div>

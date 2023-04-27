@@ -21,7 +21,7 @@ export default function Shiree() {
       <Col flex="auto">
         <Row>
         {ctx.state.shireenuud.map((el) => (
-           <Col key={el.id} style={{fontSize: "18px", textAlign: "center", margin: "5px", background: "#FCF7FD", height: "53px", borderRadius: "10px", color: "#8C55C1", fontWeight: "bold", padding: "10px", fontSize: "20px", minWidth: "50px"}}> {el.nme}</Col>
+           <Col onClick={()=>ctx.changeStateValue("selectedTableId", el.id)} key={el.id} style={{fontSize: "18px", textAlign: "center", margin: "5px", background: el.id==ctx.state.selectedTableId ? "#8C55C1":  "#FCF7FD" , height: "53px", borderRadius: "10px", color: el.id==ctx.state.selectedTableId ? "white": "#8C55C1", fontWeight: "bold", padding: "10px", fontSize: "20px", minWidth: "50px"}}> {el.nme}</Col>
           ))}  
         </Row>
         

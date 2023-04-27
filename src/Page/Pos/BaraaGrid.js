@@ -66,8 +66,9 @@ export default function BaraaGrid() {
             xxl: 10,
           }}
           dataSource={ctx.state.baraanuud}
+
           renderItem={(item) => (
-            <List.Item>
+            <List.Item onClick={() => ctx.addItemToOrder(item.id)}>
               <BaraaItem nme={item.nme} zurag={item.pht} une={item.une} />
             </List.Item>
           )}
