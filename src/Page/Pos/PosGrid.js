@@ -47,12 +47,17 @@ const PosGrid = () => {
               >
                 {(ctx.state.order
                   .find(({ shiree }) => shiree === ctx.state.selectedTableId)
-                  ?.items)?.slice().reverse().map((el9) => (
-                    <OrderItem 
+                  ?.items)?.slice().reverse().map((el9, index) => (
+                    <OrderItem                      
+                      selectedProductID = {ctx.state.selectedProductID}
+                      selectedItemIndex = {ctx.state.selectedItemIndex}
+                      selectedProductDate= {ctx.state.selectedProductDate}
+                      itemindex={index}
                       itemid={el9.itemid}
                       itemname={el9.itemname}
                       itemtoo={el9.itemtoo}
                       itemune={el9.itemune}
+                      itemdate={el9.itemdate}
                     />
                   ))}
                 {ctx.state.selectedTableId}

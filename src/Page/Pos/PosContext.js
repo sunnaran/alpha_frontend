@@ -17,6 +17,9 @@ const initialState = {
   order: [],
   selectedOrderItem: null,
   selectedTableId: null,
+  selectedProductCategory: null,
+  selectedProductID: null,
+  selectedProductDate: null
 };
 
 export const PosStore = (props) => {
@@ -168,7 +171,7 @@ export const PosStore = (props) => {
         ({ shiree }) => shiree == state.selectedTableId
       ).items;
     } else {
-      myitems.push({ itemid: product.id, itemname: product.nme,  itemune: product.une, itemtoo: 1 });
+      myitems.push({ itemid: product.id, itemname: product.nme,  itemune: product.une, itemtoo: 1, itemdate: Date.now() });
     }
 
     let itemlenght = olditems.length;
@@ -180,6 +183,7 @@ export const PosStore = (props) => {
             itemname: el1.itemname,
             itemtoo: el1.itemtoo + 1,
             itemune: product.une,
+            itemdate: Date.now()
           });
         } else {
           myitems.push(el1);
@@ -188,6 +192,7 @@ export const PosStore = (props) => {
             itemname: product.nme,
             itemtoo: 1,
             itemune: product.une,
+            itemdate: Date.now()
           });
         }
       } else {
@@ -213,7 +218,49 @@ export const PosStore = (props) => {
       selectedOrderItem: product,
     }));
   };
+  
+  // Plus, minus item
+  
+  const changePieceOfItem = (itemid, itemdate, isplus) => {      
+    let myorder = [];
+    state.order
+      .filter(({ shiree }) => shiree != state.selectedTableId)
+      .map((el) => myorder.push(el));
+    let myitems = [];
+    let olditems = state.order.find(
+      ({ shiree }) => shiree == state.selectedTableId
+    ).items;
+
+    olditems.map((el9, index) => {
+      let itemtoo9 = el9.itemtoo;
+      if(el9.itemid == itemid && itemdate==el9.itemdate){
+        isplus ? itemtoo9++ : itemtoo9--;
+      }
+      if(itemtoo9<0) itemtoo9 = 0;
+      myitems.push({ itemid: el9.itemid, itemname: el9.itemname,  itemune: el9.itemune, itemtoo: itemtoo9, itemdate: el9.itemdate });
+    })
+
+
    
+    //niit dun tootsoh
+    let totalprice = 0;
+    myitems.map((el) => {
+      console.log(el);
+      totalprice = totalprice + el.itemune * el.itemtoo;
+    });
+
+    myorder.push({
+      shiree: state.selectedTableId,
+      totalprice: totalprice,
+      items: myitems,
+    });
+
+    setState((state) => ({
+      ...state,
+      order: myorder, 
+    }));
+  };
+
 
   return (
     <PosContext.Provider
@@ -224,6 +271,7 @@ export const PosStore = (props) => {
         getBaraaAngilal,
         changeStateValue,
         addItemToOrder,
+        changePieceOfItem
       }}
     >
       {props.children}

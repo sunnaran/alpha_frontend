@@ -24,8 +24,9 @@ export default function BaraaGrid() {
         {ctx.state.baraaangilal.map((el) => (
           <Col xs={12} sm={8} md={6} lg={4} xl={2} key={el.id}>
             <div
-            
+              onClick={()=>ctx.changeStateValue('selectedProductCategory', el.id)}            
               style={{
+                cursor: "pointer",
                 textAlign: "center",
                 marginRight: "15px",
                 background: "#F1EBF2",
@@ -65,7 +66,7 @@ export default function BaraaGrid() {
             xl: 8,
             xxl: 10,
           }}
-          dataSource={ctx.state.baraanuud}
+          dataSource={ctx.state.selectedProductCategory == '2E5138E49A7144B8BA822A1CB94BF917' ? ctx.state.baraanuud : ctx.state.baraanuud.filter((el)=>el.trl==ctx.state.selectedProductCategory)}
 
           renderItem={(item) => (
             <List.Item onClick={() => ctx.addItemToOrder(item)}>
