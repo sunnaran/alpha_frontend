@@ -3,10 +3,15 @@ import { Row, Col, Select, Space } from "antd";
 import logo from "../../assets/alphalogo.png";
 import css from "./posheader.module.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import PosContext from "./PosContext";
 export default function PosHeader() {
+  const ctx = useContext(PosContext);
   const handleChange = (value) => {        
-    localStorage.setItem("branch", value);
+    localStorage.setItem("branch", value);    
+    ctx.changeStateValue("branch", value)
   };
+  
 
   return (
     <Row style={{ background: "#FAEEFC" }}>
@@ -18,13 +23,13 @@ export default function PosHeader() {
             </td>
             <td>
               <div style={{ background: "white", padding: "6px" }}>
-                С.Нарангэрэл
+                {sessionStorage.getItem("filtername")}
               </div>
             </td>
             <td>
               <div style={{   padding: "6px" }}>
                 <Select
-                  defaultValue="Баар"
+                  defaultValue={localStorage.getItem("branch")}
                   style={{
                     width: 120,
                   }}
@@ -35,8 +40,8 @@ export default function PosHeader() {
                       label: "Баар",
                     },
                     {
-                      value: "Паб",
-                      label: "Паб",
+                      value: "Пааб",
+                      label: "Пааб",
                     }, 
                   ]}
                 />

@@ -17,9 +17,10 @@ const initialState = {
   order: [],
   selectedOrderItem: null,
   selectedTableId: null,
-  selectedProductCategory: null,
+  selectedProductCategory: "total",
   selectedProductID: null,
-  selectedProductDate: null
+  selectedProductDate: null,
+  branch: localStorage.getItem("branch")
 };
 
 export const PosStore = (props) => {
@@ -150,17 +151,16 @@ export const PosStore = (props) => {
     setState((state) => ({ ...state, [name]: value }));
   };
 
-  const createNewTable = (tableid) =>{
-    let myorder =[];
+  const createNewTable = (tableid) => {
+    let myorder = [];
     state.order
       .filter(({ shiree }) => shiree != tableid)
       .map((el) => myorder.push(el));
-      setState((state) => ({
-        ...state,
-        order: myorder
-      }));
-    
-  }
+    setState((state) => ({
+      ...state,
+      order: myorder,
+    }));
+  };
   const saveOrder = () => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
     const messagecode = 125001;
@@ -173,10 +173,16 @@ export const PosStore = (props) => {
     };
     const data = {
       token,
+      haana: state.branch,
       shireeid: state.selectedTableId,
-      shireename: state.shireenuud.find((el)=>el.id==state.selectedTableId)?.nme,
-      shireeprice: state.order.find(({shiree})=> shiree==state.selectedTableId)?.totalprice,    
-      products: state.order.find(({shiree})=> shiree==state.selectedTableId)?.items,    
+      shireename: state.shireenuud.find((el) => el.id == state.selectedTableId)
+        ?.nme,
+      shireeprice: state.order.find(
+        ({ shiree }) => shiree == state.selectedTableId
+      )?.totalprice,
+      products: state.order.find(
+        ({ shiree }) => shiree == state.selectedTableId
+      )?.items,
     };
     changeStateValue("loading", true);
     axios
@@ -194,7 +200,7 @@ export const PosStore = (props) => {
           createNewTable(state.selectedTableId);
         }
         setState((state) => ({
-          ...state,          
+          ...state,
           loading: false,
         }));
       })
@@ -205,8 +211,7 @@ export const PosStore = (props) => {
   };
 
   const addItemToOrder = (product) => {
-    if(state.selectedTableId == null)
-    {
+    if (state.selectedTableId == null) {
       message.warning("Ширээ сонгоно уу");
       return;
     }
@@ -225,7 +230,13 @@ export const PosStore = (props) => {
         ({ shiree }) => shiree == state.selectedTableId
       ).items;
     } else {
-      myitems.push({ itemid: product.id, itemname: product.nme,  itemune: product.une, itemtoo: 1, itemdate: Date.now() });
+      myitems.push({
+        itemid: product.id,
+        itemname: product.nme,
+        itemune: product.une,
+        itemtoo: 1,
+        itemdate: Date.now(),
+      });
     }
 
     let itemlenght = olditems.length;
@@ -237,7 +248,7 @@ export const PosStore = (props) => {
             itemname: el1.itemname,
             itemtoo: el1.itemtoo + 1,
             itemune: product.une,
-            itemdate: Date.now()
+            itemdate: Date.now(),
           });
         } else {
           myitems.push(el1);
@@ -246,7 +257,7 @@ export const PosStore = (props) => {
             itemname: product.nme,
             itemtoo: 1,
             itemune: product.une,
-            itemdate: Date.now()
+            itemdate: Date.now(),
           });
         }
       } else {
@@ -272,10 +283,10 @@ export const PosStore = (props) => {
       selectedOrderItem: product,
     }));
   };
-  
+
   // Plus, minus item
-  
-  const changePieceOfItem = (itemid, itemdate, isplus) => {      
+
+  const changePieceOfItem = (itemid, itemdate, isplus) => {
     let myorder = [];
     state.order
       .filter(({ shiree }) => shiree != state.selectedTableId)
@@ -287,15 +298,19 @@ export const PosStore = (props) => {
 
     olditems.map((el9, index) => {
       let itemtoo9 = el9.itemtoo;
-      if(el9.itemid == itemid && itemdate==el9.itemdate){
+      if (el9.itemid == itemid && itemdate == el9.itemdate) {
         isplus ? itemtoo9++ : itemtoo9--;
       }
-      if(itemtoo9<0) itemtoo9 = 0;
-      myitems.push({ itemid: el9.itemid, itemname: el9.itemname,  itemune: el9.itemune, itemtoo: itemtoo9, itemdate: el9.itemdate });
-    })
+      if (itemtoo9 < 0) itemtoo9 = 0;
+      myitems.push({
+        itemid: el9.itemid,
+        itemname: el9.itemname,
+        itemune: el9.itemune,
+        itemtoo: itemtoo9,
+        itemdate: el9.itemdate,
+      });
+    });
 
-
-   
     //niit dun tootsoh
     let totalprice = 0;
     myitems.map((el) => {
@@ -311,10 +326,9 @@ export const PosStore = (props) => {
 
     setState((state) => ({
       ...state,
-      order: myorder, 
+      order: myorder,
     }));
   };
-
 
   return (
     <PosContext.Provider
@@ -326,7 +340,7 @@ export const PosStore = (props) => {
         changeStateValue,
         addItemToOrder,
         changePieceOfItem,
-        saveOrder
+        saveOrder,
       }}
     >
       {props.children}

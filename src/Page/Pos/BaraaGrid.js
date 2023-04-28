@@ -66,7 +66,7 @@ export default function BaraaGrid() {
             xl: 8,
             xxl: 10,
           }}
-          dataSource={ctx.state.selectedProductCategory == '2E5138E49A7144B8BA822A1CB94BF917' ? ctx.state.baraanuud : ctx.state.baraanuud.filter((el)=>el.trl==ctx.state.selectedProductCategory)}
+          dataSource={ctx.state.selectedProductCategory == 'total' ? ctx.state.baraanuud : ctx.state.baraanuud.filter((el)=>el.trl==ctx.state.selectedProductCategory)}
 
           renderItem={(item) => (
             <List.Item onClick={() => ctx.addItemToOrder(item)}>

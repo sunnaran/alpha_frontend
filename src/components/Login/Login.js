@@ -63,8 +63,8 @@ export default function Login({ setToken }) {
           return;
         }
         sessionStorage.setItem("filtername", response.data.result.filtername);
-        sessionStorage.setItem("role", response.data.result.role);
-        sessionStorage.setItem("sqd", response.data.result.sqd);
+        localStorage.setItem("branch", response.data.result.sqd);
+ 
 
         setToken(response.data.result);
         setLoading(false);

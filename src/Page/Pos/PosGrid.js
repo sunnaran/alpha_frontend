@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback} from "react";
 import PosHeader from "./PosHeader";
 import Shiree from "./Shiree";
 import PosContext, { PosStore } from "./PosContext";
@@ -10,8 +10,11 @@ import MyCurrency from "../../Function/MyCurrency";
 import { useContext } from "react";
 import {ExclamationCircleFilled} from "@ant-design/icons";
 import SumCurrency from "../../Function/SumCurrency";
- 
+import { FullScreen, useFullScreenHandle } from "react-full-screen"
+import { useEffect } from "react";
+
 const PosGrid = () => {
+  
   const ctx = useContext(PosContext);
   const style = {
     marginLeft: "10px",
@@ -41,6 +44,22 @@ const PosGrid = () => {
       },
     });
   };
+  const handle = useFullScreenHandle()
+  const [isFullscreen, setFullscreen] = useState(false)
+
+  const reportChange = useCallback((state) => {
+    console.log(state)
+    if (state === true) {
+      setFullscreen(true)
+    } else if (state === false) {
+      setFullscreen(false)
+    }
+  })
+  useEffect(() => {    
+    document.body.requestFullscreen();
+    
+  }, [])
+  
   return (
     <div style={{ background: "#E8E7EA", height: "100vh" }}>
       <PosHeader />
