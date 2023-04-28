@@ -4,7 +4,7 @@ import MyHeader from "../constcomponents/MyHeader";
 
 export default function Preferences() {
   useEffect(() => {
-    document.exitFullscreen();
+    // document.exitFullscreen();
   }, [])
   
   return (

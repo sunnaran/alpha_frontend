@@ -56,12 +56,12 @@ const PosGrid = () => {
     }
   })
   useEffect(() => {    
-    document.body.requestFullscreen();
+    // document.body.requestFullscreen();
     
   }, [])
   
   return (
-    <div style={{ background: "#E8E7EA", height: "100vh" }}>
+    <div style={{ background: "#E8E7EA", height: "100vh", minWidth: "1024px" }}>
       <PosHeader />
       <Shiree />
       <table>

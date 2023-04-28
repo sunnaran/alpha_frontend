@@ -17,6 +17,8 @@ import ProductsGrid from "../Products/ProductsGrid";
 import QrmenuGrid from "../QRmenu/QrmenuGrid"; 
 import PosGrid from "../../Page/Pos/PosGrid";
 import { PosStore } from "../../Page/Pos/PosContext";
+import OrlogoGrid from "../../Page/Orlogo/OrlogoGrid";
+import AdminContext, {AdminStore} from "../../context/AdminContext";
 function App() {
   const { token, setToken } = useToken();
   if (!token) {
@@ -31,10 +33,11 @@ function App() {
   else 
   return (
     <>
-    
+    <AdminStore>
+    <PosStore>
         <Routes>
         <Route path="/" element={<Preferences />} />
-        <Route path="/pos" element={<PosStore><PosGrid /></PosStore>} />
+        <Route path="/pos" element={<PosGrid />} />
         <Route path="/baraa" element={<ProductsStore><ProductsGrid/></ProductsStore>} />
         <Route path="/shiree" element={<ShireeStore><ShireeGrid /></ShireeStore>} />
         <Route path="/qrmenu/:id" element={<QrmenuGrid/>} />
@@ -46,11 +49,13 @@ function App() {
             </AccountStore>
           }
         />
+        <Route path="/orlogo" element={<OrlogoGrid />} />
         <Route path="/tonog" element={<div><CrimeWorkerStore><CrimeWorkerGrid/></CrimeWorkerStore></div>} />
         {!token && <Route path="*" element={ <Login setToken={setToken}/> }/>}
         <Route path="*" element={<Preferences />} />
       </Routes>
-       
+      </PosStore>
+      </AdminStore>
     </>
   );
 }
