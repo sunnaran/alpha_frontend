@@ -150,6 +150,46 @@ export const PosStore = (props) => {
     setState((state) => ({ ...state, [name]: value }));
   };
 
+  const saveOrder = () => {
+    const token = JSON.parse(sessionStorage.getItem("token"))?.token;
+    const messagecode = 125001;
+    const configload = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        request_code: messagecode,
+      },
+    };
+    const data = {
+      token,
+      shireeid: state.selectedTableId,
+      shireename: state.shireenuud.find((el)=>el.id==state.selectedTableId)?.nme,
+      totalprice: state.order.find(({shiree})=> shiree==state.selectedTableId)?.totalprice,    
+      products: state.order.find(({shiree})=> shiree==state.selectedTableId)?.items,    
+    };
+    changeStateValue("loading", true);
+    axios
+      .post("/public/request", data, configload)
+      .then((response) => {
+        console.log("success: ", messagecode);
+        if (response.data.code == 401) {
+          sessionStorage.clear();
+          window.location.reload(false);
+          message.warning(response.data.message);
+          return;
+        }
+        
+        setState((state) => ({
+          ...state,          
+          loading: false,
+        }));
+      })
+      .catch((error) => {
+        changeStateValue("loading", false);
+        message.info("Алдаа гарлаа. code:", messagecode);
+      });
+  };
+
   const addItemToOrder = (product) => {
     if(state.selectedTableId == null)
     {
@@ -271,7 +311,8 @@ export const PosStore = (props) => {
         getBaraaAngilal,
         changeStateValue,
         addItemToOrder,
-        changePieceOfItem
+        changePieceOfItem,
+        saveOrder
       }}
     >
       {props.children}

@@ -3,13 +3,14 @@ import PosHeader from "./PosHeader";
 import Shiree from "./Shiree";
 import PosContext, { PosStore } from "./PosContext";
 import Footer from "./Footer";
-import { Row, Col, Button } from "antd";
+import { Row, Col, Button, Modal, Space } from "antd";
 import BaraaGrid from "./BaraaGrid";
 import OrderItem from "./OrderItem";
 import MyCurrency from "../../Function/MyCurrency";
 import { useContext } from "react";
+import {ExclamationCircleFilled} from "@ant-design/icons";
 import SumCurrency from "../../Function/SumCurrency";
-
+ 
 const PosGrid = () => {
   const ctx = useContext(PosContext);
   const style = {
@@ -23,7 +24,23 @@ const PosGrid = () => {
     height: "120px",
     textAlign: "center",
   };
+  const { confirm } = Modal;
 
+  const showConfirm = () => {
+    confirm({
+      title: 'Хадгалахдаа итгэлтэй байна уу?',
+      icon: <ExclamationCircleFilled />,
+      content: '',
+      okText:"Илгээх",
+        cancelText:"Хаах",
+      onOk() {
+       ctx.saveOrder();
+      },
+      onCancel() {
+        console.log('Үгүй');
+      },
+    });
+  };
   return (
     <div style={{ background: "#E8E7EA", height: "100vh" }}>
       <PosHeader />
@@ -70,14 +87,16 @@ const PosGrid = () => {
                 <div>
                   <Button
                     style={{
+                      marginLeft: "-10px",
                       background: "#5A199C",
                       color: "white",
-                      width: "96%",
+                      width: "95%",
                       height: "58px",
                       fontSize: "30px",
                     }}
+                    onClick={showConfirm}
                   >
-                    ТӨЛБӨР
+                    ИЛГЭЭХ
                   </Button>
                 </div>
               </div>
