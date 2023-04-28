@@ -148,6 +148,11 @@ export const PosStore = (props) => {
   };
 
   const addItemToOrder = (product) => {
+    if(state.selectedTableId == null)
+    {
+      message.warning("Ширээ сонгоно уу");
+      return;
+    }
     console.log(product);
     let myorder = [];
     state.order
@@ -163,7 +168,7 @@ export const PosStore = (props) => {
         ({ shiree }) => shiree == state.selectedTableId
       ).items;
     } else {
-      myitems.push({ itemid: product.id, itemname: product.nme, itemtoo: 1 });
+      myitems.push({ itemid: product.id, itemname: product.nme,  itemune: product.une, itemtoo: 1 });
     }
 
     let itemlenght = olditems.length;
@@ -189,9 +194,16 @@ export const PosStore = (props) => {
         myitems.push(el1);
       }
     });
+    //niit dun tootsoh
+    let totalprice = 0;
+    myitems.map((el) => {
+      console.log(el);
+      totalprice = totalprice + el.itemune * el.itemtoo;
+    });
 
     myorder.push({
       shiree: state.selectedTableId,
+      totalprice: totalprice,
       items: myitems,
     });
 
@@ -201,106 +213,7 @@ export const PosStore = (props) => {
       selectedOrderItem: product,
     }));
   };
-  const addItemToOrderOld = (value) => {
-    let neworder = [];
-    console.log("Хоосон ордер үүсгэлээ");
-    let zahialgatshireeindex = 0;
-    let zahialgatshiree = false;
-    state.order.map((el, index) => {
-      if (state.selectedTableId == el.shiree) {
-        //Umnu zahialga hiigdsen
-        zahialgatshiree = true;
-        zahialgatshireeindex = index;
-      }
-    });
-    console.log("Захиалгат ширээ шалгалаа");
-    console.log("Индекс :", zahialgatshireeindex);
-    console.log("Утга нь:", zahialgatshiree);
-
-    if (zahialgatshiree == false) {
-      neworder = state.order;
-      neworder.push({
-        shiree: state.selectedTableId,
-        items: [{ itemid: value, itemname: "testshine", itemtoo: 1 }],
-      });
-      setState((state) => ({
-        ...state,
-        order: neworder,
-        selectedOrderItem: value,
-      }));
-
-      console.log("Захиалгат  биш байсан тул стэйт солилоо");
-    } else {
-      console.log("Захиалгат  тул ийшээ орж ирсэн");
-      //zahialgataas busad data oruulna
-      state.order.map((el) => {
-        if (el.shiree != state.selectedTableId) {
-          neworder.push(el);
-        }
-      });
-      console.log("Байгаагаас бусдыг нэмсэн", neworder);
-      //zahialsan shireenii medeelel zasah ehellee
-      let newitems = [];
-      let suuliinelementijil = false;
-      console.log("items tooloh umnu");
-      if (state.order[zahialgatshireeindex].items.length > 0) {
-        console.log("Өгөгдөл байгааг илрүүллээ");
-        let suuliinelement = state.order[zahialgatshireeindex].items.splice(-1);
-        console.log("suuliin elelemnt", suuliinelement);
-        console.log("suuliin elelemnt id ni", suuliinelement[0].itemid);
-        console.log("songogdson elelemnt id", value);
-        if (suuliinelement[0].itemid == value) {
-          suuliinelementijil = true;
-          console.log(suuliinelementijil);
-          console.log("suuuuliin elelemnttttttttttttttttttt");
-        }
-        if (suuliinelementijil) {
-          let mynewitems = [];
-          state.order[zahialgatshireeindex].items.map((element, index) => {
-            if (index < state.order[zahialgatshireeindex].items.length) {
-              mynewitems.push(element);
-            }
-          });
-          console.log("Сүүлийн элементээс өмнөхийг оноосон", mynewitems);
-          mynewitems.push({
-            itemid: value,
-            itemname: "test",
-            itemtoo: suuliinelement.itemtoo + 1,
-          });
-          console.log("Сүүлийн элэмэнтийг ахиулаад нэмчихлээ");
-          neworder.push({ shiree: state.selectedTableId, items: mynewitems });
-          setState((state) => ({
-            ...state,
-            order: neworder,
-            selectedOrderItem: value,
-          }));
-        } else {
-          let myitems = [];
-          state.order[zahialgatshireeindex].items.map((el2) =>
-            myitems.push(el2)
-          );
-          myitems.push({ itemid: value, itemname: "test", itemtoo: 1 });
-          console.log("Сүүлийн элемент биш байсан тул шинээр нэмсэн");
-          neworder.push({ shiree: state.selectedTableId, items: myitems });
-          setState((state) => ({
-            ...state,
-            order: neworder,
-            selectedOrderItem: value,
-          }));
-        }
-      } else {
-        let myitems = [];
-        console.log("Өгөгдөл байхгүйг илрүүллээ");
-        myitems.push({ itemid: value, itemname: "test", itemtoo: 1 });
-        neworder.push({ shiree: state.selectedTableId, items: myitems });
-        setState((state) => ({
-          ...state,
-          order: neworder,
-          selectedOrderItem: value,
-        }));
-      }
-    }
-  };
+   
 
   return (
     <PosContext.Provider

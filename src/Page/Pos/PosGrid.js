@@ -59,7 +59,8 @@ const PosGrid = () => {
               </div>
               <div style={style}>
                 <div style={{ textAlign: "left", fontWeight: "bold" }}>
-                  100000
+                  <MyCurrency>{ctx.state.order.find(({ shiree }) => shiree == ctx.state.selectedTableId)?.totalprice}</MyCurrency>
+
                 </div>
                 <div>
                   <Button
@@ -78,7 +79,7 @@ const PosGrid = () => {
             </div>
           </td>
           <td>
-            {" "}
+            
             <div style={{ background: "transparent", margin: "5px" }}>
               <BaraaGrid />
             </div>

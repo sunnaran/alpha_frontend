@@ -7,7 +7,7 @@ import MyCurrency from "../../Function/MyCurrency";
 var currencyFormatter = require("currency-formatter");
 const OrderItem = (props) => {
   return (
-    <div style={{background: "#FBFCFF", margin: "10px", borderRadius: "10px", padding: "5px"}}>
+    <div key={props.itemid} style={{background: "#FBFCFF", margin: "10px", borderRadius: "10px", padding: "5px"}}>
       <Row align="middle">
         <Col flex="auto">
           <div style={{ fontSize: "20px" }}>
