@@ -105,7 +105,7 @@ export const PosStore = (props) => {
       })
       .catch((error) => {
         changeStateValue("loading", false);
-        message.info("Алдаа гарлаа 124000");
+        message.warning("Алдаа гарлаа 124000");
       });
   };
 
@@ -150,6 +150,17 @@ export const PosStore = (props) => {
     setState((state) => ({ ...state, [name]: value }));
   };
 
+  const createNewTable = (tableid) =>{
+    let myorder =[];
+    state.order
+      .filter(({ shiree }) => shiree != tableid)
+      .map((el) => myorder.push(el));
+      setState((state) => ({
+        ...state,
+        order: myorder
+      }));
+    
+  }
   const saveOrder = () => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
     const messagecode = 125001;
@@ -164,7 +175,7 @@ export const PosStore = (props) => {
       token,
       shireeid: state.selectedTableId,
       shireename: state.shireenuud.find((el)=>el.id==state.selectedTableId)?.nme,
-      totalprice: state.order.find(({shiree})=> shiree==state.selectedTableId)?.totalprice,    
+      shireeprice: state.order.find(({shiree})=> shiree==state.selectedTableId)?.totalprice,    
       products: state.order.find(({shiree})=> shiree==state.selectedTableId)?.items,    
     };
     changeStateValue("loading", true);
@@ -178,7 +189,10 @@ export const PosStore = (props) => {
           message.warning(response.data.message);
           return;
         }
-        
+        if (response.data.code == 200) {
+          message.info(response.data.message);
+          createNewTable(state.selectedTableId);
+        }
         setState((state) => ({
           ...state,          
           loading: false,

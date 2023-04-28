@@ -77,7 +77,7 @@ const PosGrid = () => {
                       itemdate={el9.itemdate}
                     />
                   ))}
-                {ctx.state.selectedTableId}
+                
               </div>
               <div style={style}>
                 <div style={{ textAlign: "left", fontWeight: "bold" }}>
