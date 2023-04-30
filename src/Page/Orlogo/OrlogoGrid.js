@@ -24,7 +24,7 @@ const initialState = {
 export default function OrlogoGrid() {
   const [state, setState] = useState(initialState);
   const [open, setOpen] = useState(false);
-  const [utga, setUtga] = useState("");
+  const [utga, setUtga] = useState("Орлого");
   const [loading, setLoading] = useState(false);
   const ctx = useContext(PosContext);
 

@@ -133,7 +133,7 @@ export default function HuulgaHeader() {
             {ctx.state.filter && (
               <Button
                 icon={<CloseOutlined />}
-                type="danger"
+                type="dashed" danger
                 size="small"
                 onClick={() => {
                   ctx.loadData();
