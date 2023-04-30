@@ -1,10 +1,10 @@
 import React from "react";
 import HuulgaContext from "./HuulgaContext";
 import MyHeader from "../../components/constcomponents/MyHeader";
-import HuulgaTable from "./HuulgaTable";
-import HuulgaBar from "./HuulgaBar";
+import HuulgaTable from "./HuulgaTable"; 
 import { useEffect } from "react";
 import { useContext } from "react";
+import HuulgaHeader from "./HuulgaHeader";
 export default function HuugaGrid() {
   const ctx = useContext(HuulgaContext);
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function HuugaGrid() {
     <>
       <div>
         <MyHeader />
-        <HuulgaBar />
+        <HuulgaHeader />
         <HuulgaTable />
       </div>
     </>
