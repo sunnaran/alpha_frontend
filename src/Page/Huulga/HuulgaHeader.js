@@ -10,6 +10,7 @@ import {
   Menu,
   Spin,
   Dropdown,
+  Alert,
 } from "antd";
 
 import {
@@ -26,12 +27,24 @@ import {
 } from "@ant-design/icons";
 
 import HuulgaContext from "./HuulgaContext";
+import MyCurrency from "../../Function/MyCurrency";
 const { Option } = Select;
 const { Search } = Input;
 
-export default function HuulgaHeader() {
-  
+export default function HuulgaHeader() {  
   const ctx = useContext(HuulgaContext);
+  const getPieces = () =>
+  {
+    let sum=0;
+    ctx.state.list?.map((el)=>sum+=Number(el.producttoo));
+    return sum;
+  }
+  const getTotalPrice = () =>
+  {
+    let dun=0;
+    ctx.state.list?.map((el)=>dun+=Number(el.productune)*Number(el.producttoo));
+    return dun;
+  }
   return (
     <Layout style={{ backgroundColor: "#ceddff" }}>
       <Row>
@@ -143,6 +156,10 @@ export default function HuulgaHeader() {
               </Button>
             )}
             {ctx.state.loading && <Spin />}
+                <div>
+                  Нийт тоо хэмжээ: <b><MyCurrency>{getPieces()}</MyCurrency></b>
+                  Нийт дүн: <b><MyCurrency>{getTotalPrice()}</MyCurrency>₮</b>
+                </div>
           </Space>
         </Col>
         <Col

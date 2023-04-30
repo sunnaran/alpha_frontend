@@ -107,6 +107,7 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
+              placeholder="цэг даслал (,) ашиглахгүй"
                 value={ctx.state.too}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
@@ -120,6 +121,7 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
+              placeholder="цэг даслал (,) ашиглахгүй"
                 value={ctx.state.une}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
@@ -133,6 +135,7 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
+              placeholder="цэг даслал (,) ашиглахгүй"
                 value={ctx.state.niitune}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
