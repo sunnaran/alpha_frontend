@@ -34,14 +34,18 @@ export default function AntMenu() {
       <Menu.Item key="pos" icon={<AppstoreOutlined />}>
         <Link to="/pos">ПОС</Link>
       </Menu.Item>
+      <Menu.Item key="orlogo" icon={<AppstoreOutlined />}>
+        <Link to="/orlogo">Орлого хийх</Link>
+      </Menu.Item>
       <Menu.Item key="huulga" icon={<AppstoreOutlined />}>
         <Link to="/huulga">Хуулга</Link>
       </Menu.Item>
-      <Menu.Item key="orlogo" icon={<AppstoreOutlined />}>
-        <Link to="/orlogo">Барааны орлого</Link>
+      <Menu.Item key="uldegdel" icon={<AppstoreOutlined />}>
+        <Link to="/uldegdel">Үлдэгдэл</Link>
       </Menu.Item>
+    
       <Menu.Item key="baraa" icon={<AppstoreOutlined />}>
-        <Link to="/baraa">Бараа</Link>
+        <Link to="/baraa">Бараа, бүтээгдэхүүн</Link>
       </Menu.Item>
       <Menu.Item key="shiree" icon={<AppstoreOutlined />}>
         <Link to="/shiree">Ширээ</Link>
