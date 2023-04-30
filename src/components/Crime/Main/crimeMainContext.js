@@ -216,7 +216,7 @@ export const CrimeMainStore = (props) => {
     }
     let new_p_personlist = [];
     state.p_personlist.length > 0 &&
-      state.p_personlist.map((el) => {
+      state.p_personlist?.map((el) => {
         new_p_personlist.push(el);
       });
     new_p_personlist.push({
@@ -247,7 +247,7 @@ export const CrimeMainStore = (props) => {
   };
   const updatePerson = () => {
     let new_p_personlist = [];
-    state.p_personlist.map((el, index) => {
+    state.p_personlist?.map((el, index) => {
       index != state.selectedpersonindex
         ? new_p_personlist.push(el)
         : new_p_personlist.push({
@@ -561,8 +561,8 @@ export const CrimeMainStore = (props) => {
         let excelDataList1 = [];
         excelDataList1 =
           response.data.result.list == null ? [] : response.data.result.list;
-        excelDataList1.map((el) => {
-          el.person_list.map((el1) => excelDataCNN1.push(el1));
+        excelDataList1?.map((el) => {
+          el.person_list?.map((el1) => excelDataCNN1.push(el1));
         });
         setState((state) => ({
           ...state,
@@ -640,7 +640,7 @@ export const CrimeMainStore = (props) => {
   const openUpdate = (el) => {
     let mypersonlist = [];
     let myuploadfiles = [];
-    el.person_list.map((el) =>
+    el.person_list?.map((el) =>
       mypersonlist.push({
         fp_id: el.id,
         fp_m_id: el.m_id,
@@ -665,7 +665,7 @@ export const CrimeMainStore = (props) => {
       })
     );
     el.uploadfiles != null &&
-      el.uploadfiles.map((el) =>
+      el.uploadfiles?.map((el) =>
         myuploadfiles.push({
           id: el.id,
           bucket: el.bucket,

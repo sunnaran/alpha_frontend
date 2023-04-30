@@ -16,7 +16,7 @@ const OperationsSlot = {
   right: <Button>Right Extra Action</Button>,
 };
 const options = ['left', 'right'];
-const items = new Array(10).fill(null).map((_, i) => {
+const items = new Array(10).fill(null)?.map((_, i) => {
   const id = String(i + 1);
   return {
     label: `Tab ${id}`,

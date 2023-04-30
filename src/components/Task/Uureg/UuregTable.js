@@ -237,7 +237,7 @@ export default function UuregTable() {
           </tr>
         </thead>
         <tbody>
-          {ctx.state.dataList.map((el) => (
+          {ctx.state.dataList?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr>
                 <td>
@@ -267,7 +267,7 @@ export default function UuregTable() {
                 </td>
                 <td>
                   {el.uploadfiles != null &&
-                    el.uploadfiles.map((el) => (
+                    el.uploadfiles?.map((el) => (
                       <DownloadFile
                         filename={el.name}
                         bucket={el.bucket}

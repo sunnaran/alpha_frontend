@@ -190,7 +190,7 @@ export default function ModalInsert() {
               value={ctx.state.trl}
               onSelect={(value, event) => ctx.changeStateValue("trl", value)}
             >
-              {ctx.state.trl_list.map((el) => (
+              {ctx.state.trl_list?.map((el) => (
                 <Select.Option key={el.id}>
                   {el.name}
                 </Select.Option>

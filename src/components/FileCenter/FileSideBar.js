@@ -19,7 +19,7 @@ export default function FileSideBar() {
       <img height="100px" width="100px" src={imgfile} />
       <div style={{ height: "30px" }}></div>
 
-      {ctxFile.state.listCategory.map((el) =>
+      {ctxFile.state.listCategory?.map((el) =>
         ctxFile.state.s_catid == el.id ? (
           <div
             onClick={() => {

@@ -411,7 +411,7 @@ export default function TableContent() {
           </tr>
         </thead>
         <tbody>
-          {ctxmaincrime.state.datalist.map((el) => (
+          {ctxmaincrime.state.datalist?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr>
                 <td></td>
@@ -446,7 +446,7 @@ export default function TableContent() {
                 </td>
                 <td>
                   {el.uploadfiles != null &&
-                    el.uploadfiles.map((el) => (
+                    el.uploadfiles?.map((el) => (
                       <DownloadFile
                         filename={el.name}
                         bucket={el.bucket}

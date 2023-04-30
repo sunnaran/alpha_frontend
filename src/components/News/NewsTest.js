@@ -138,7 +138,7 @@ export default function NewsTest() {
       <Button onClick={() => download()}>get size object</Button>
       <Button onClick={() => downloadurl()}>download object</Button>
       <ul>
-        {buckets.slice(0, 5).map((bucket, index) => (
+        {buckets.slice(0, 5)?.map((bucket, index) => (
           <li key={index}>{bucket.name}</li>
         ))}
       </ul>

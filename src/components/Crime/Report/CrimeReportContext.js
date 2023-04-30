@@ -274,7 +274,7 @@ export const CrimeReportStore = (props) => {
   const openUpdate = (el) => {
     let myuploadfiles = [];
     el.uploadfiles != null &&
-      el.uploadfiles.map((el) =>
+      el.uploadfiles?.map((el) =>
         myuploadfiles.push({
           id: el.id,
           bucket: el.bucket,

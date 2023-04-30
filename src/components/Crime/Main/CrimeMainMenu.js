@@ -245,7 +245,7 @@ export default function CrimeMainMenu() {
                   ctx.changeStateValue("s_page_number", value)
                 }
               >
-                {ctx.state.listpage.map((el) => (
+                {ctx.state.listpage?.map((el) => (
                   <Option value={el}>{el}</Option>
                 ))}
               </Select>

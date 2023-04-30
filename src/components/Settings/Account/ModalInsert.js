@@ -221,7 +221,7 @@ export default function ModalInsert() {
               value={ctx.state.sqd}
               onSelect={(value, event) => ctx.changeStateValue("sqd", value)}
             >
-              {myConst.CONST_SQD.map((el) => (
+              {myConst.CONST_SQD?.map((el) => (
                 <Select.Option key={el} value={el}>
                   {el}
                 </Select.Option>

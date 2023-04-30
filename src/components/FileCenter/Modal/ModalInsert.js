@@ -156,7 +156,7 @@ export default function ModalInsert() {
                     ctxFile.changeStateValue("selectedCategoryId", value)
                   }
                 >
-                  {ctxFile.state.listCategory.map((el) => (
+                  {ctxFile.state.listCategory?.map((el) => (
                     <Select.Option key={el.id} value={el.id}>
                       {el.name}
                     </Select.Option>
@@ -291,7 +291,7 @@ export default function ModalInsert() {
                 )}
                 <table style={{ width: "100%", border: "0px white solid" }}>
                   {ctxFile.state.uploadfiles != null &&
-                    ctxFile.state.uploadfiles.map((el, index) => (
+                    ctxFile.state.uploadfiles?.map((el, index) => (
                       <tr style={{ border: "0px white solid" }}>
                         <td style={{ border: "0px white solid" }}>
                           <FileOutlined />

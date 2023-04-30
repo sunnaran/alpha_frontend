@@ -201,7 +201,7 @@ export default function ModalInsert() {
                         ctx.changeStateValue("sts", value)
                       }
                     >
-                      {myConst.CONST_STATUS.map((el) => (
+                      {myConst.CONST_STATUS?.map((el) => (
                         <Select.Option key={el} value={el}>
                           {el}
                         </Select.Option>
@@ -223,7 +223,7 @@ export default function ModalInsert() {
                         
                       }
                     >
-                      {ctx.state.wrks.map((el) => (
+                      {ctx.state.wrks?.map((el) => (
                         <Select.Option key={el.id}>
                           {el.name}
                         </Select.Option>

@@ -155,7 +155,7 @@ export const PosStore = (props) => {
     let myorder = [];
     state.order
       .filter(({ shiree }) => shiree != tableid)
-      .map((el) => myorder.push(el));
+      ?.map((el) => myorder.push(el));
     setState((state) => ({
       ...state,
       order: myorder,
@@ -219,7 +219,7 @@ export const PosStore = (props) => {
     let myorder = [];
     state.order
       .filter(({ shiree }) => shiree != state.selectedTableId)
-      .map((el) => myorder.push(el));
+      ?.map((el) => myorder.push(el));
     let myitems = [];
     let olditems = [];
     if (
@@ -240,7 +240,7 @@ export const PosStore = (props) => {
     }
 
     let itemlenght = olditems.length;
-    olditems.map((el1, index) => {
+    olditems?.map((el1, index) => {
       if (index == itemlenght - 1) {
         if (el1.itemid == product.id) {
           myitems.push({
@@ -266,7 +266,7 @@ export const PosStore = (props) => {
     });
     //niit dun tootsoh
     let totalprice = 0;
-    myitems.map((el) => {
+    myitems?.map((el) => {
       console.log(el);
       totalprice = totalprice + el.itemune * el.itemtoo;
     });
@@ -290,13 +290,13 @@ export const PosStore = (props) => {
     let myorder = [];
     state.order
       .filter(({ shiree }) => shiree != state.selectedTableId)
-      .map((el) => myorder.push(el));
+      ?.map((el) => myorder.push(el));
     let myitems = [];
     let olditems = state.order.find(
       ({ shiree }) => shiree == state.selectedTableId
     ).items;
 
-    olditems.map((el9, index) => {
+    olditems?.map((el9, index) => {
       let itemtoo9 = el9.itemtoo;
       if (el9.itemid == itemid && itemdate == el9.itemdate) {
         isplus ? itemtoo9++ : itemtoo9--;
@@ -313,7 +313,7 @@ export const PosStore = (props) => {
 
     //niit dun tootsoh
     let totalprice = 0;
-    myitems.map((el) => {
+    myitems?.map((el) => {
       console.log(el);
       totalprice = totalprice + el.itemune * el.itemtoo;
     });

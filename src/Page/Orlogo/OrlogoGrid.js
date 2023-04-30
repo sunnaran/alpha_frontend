@@ -92,7 +92,7 @@ export default function OrlogoGrid() {
     let neworlogo = [];
     state.orlogo
       .filter((el) => el.productID != productID)
-      .map((el1) => neworlogo.push(el1));
+      ?.map((el1) => neworlogo.push(el1));
     neworlogo.push({
       productID,
       productName: ctx.state.baraanuud.find((el1) => el1.id == productID)?.nme,
@@ -108,7 +108,7 @@ export default function OrlogoGrid() {
     let neworlogo = [];
     state.orlogo
       .filter((el) => el.productID != productID)
-      .map((el1) => neworlogo.push(el1));
+      ?.map((el1) => neworlogo.push(el1));
     neworlogo.push({
       productID,
       productName: ctx.state.baraanuud.find((el1) => el1.id == productID)?.nme,
@@ -122,12 +122,12 @@ export default function OrlogoGrid() {
   };
   const getSum = () => {
     let sum = 0;
-    state.orlogo.map((el) => (sum += el.too));
+    state.orlogo?.map((el) => (sum += el.too));
     return sum;
   };
   const getTotalPrice = () => {
     let total = 0;
-    state.orlogo.map((el) => (total += el.une * el.too));
+    state.orlogo?.map((el) => (total += el.une * el.too));
     return total;
   };
 
@@ -162,7 +162,7 @@ export default function OrlogoGrid() {
               <td>Үнэ</td>
               <td>Тоо ширхэг</td>
             </tr>
-            {ctx.state.baraanuud.map((el, index) => (
+            {ctx.state.baraanuud?.map((el, index) => (
               <tr
                 key={el.id}
                 style={{ background: index % 2 == 0 && "#e6f4ff" }}

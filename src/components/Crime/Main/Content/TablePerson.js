@@ -242,7 +242,7 @@ export default function TablePerson() {
             </tr>
           </thead>
           <tbody>
-            {ctxmaincrime.state.selectedperson.map((el) => (
+            {ctxmaincrime.state.selectedperson?.map((el) => (
               <tr>
                 <td>
                   {el.pht != null && (

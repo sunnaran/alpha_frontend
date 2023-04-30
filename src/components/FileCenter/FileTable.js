@@ -266,7 +266,7 @@ export default function FileTable() {
       </thead>
       <tbody>
         {ctxFile.state.mylist != null &&
-          ctxFile.state.mylist.map((el) => (
+          ctxFile.state.mylist?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr key={el.id}>
                 <td></td>
@@ -279,7 +279,7 @@ export default function FileTable() {
                 <td>{el.dagajmurduhognoo}</td>
                 <td>
                   {el.uploadfiles != null &&
-                    el.uploadfiles.map((el) => (
+                    el.uploadfiles?.map((el) => (
                       <DownloadFile
                         filename={el.name}
                         bucket={el.bucket}

@@ -105,7 +105,7 @@ export default function PersonList() {
         <th>Тангараг өргөсөн</th>
         <th>Боловсрол</th>
         <th></th>
-        {ctxcrimemain.state.p_personlist.map((el, index) => (
+        {ctxcrimemain.state.p_personlist?.map((el, index) => (
           <tr key={el.fp_id}>
             <td>
               {el.fp_pht != null ? (

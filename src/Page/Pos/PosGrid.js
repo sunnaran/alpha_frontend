@@ -28,7 +28,7 @@ const PosGrid = () => {
     textAlign: "center",
   };
   const { confirm } = Modal;
-  const [open, setOpen] = useState(false);
+
   const showConfirm = () => {
     confirm({
       title: 'Хадгалахдаа итгэлтэй байна уу?',
@@ -83,7 +83,7 @@ const PosGrid = () => {
               >
                 {(ctx.state.order
                   .find(({ shiree }) => shiree === ctx.state.selectedTableId)
-                  ?.items)?.slice().reverse().map((el9, index) => (
+                  ?.items)?.slice().reverse()?.map((el9, index) => (
                     <OrderItem                      
                       selectedProductID = {ctx.state.selectedProductID}
                       selectedItemIndex = {ctx.state.selectedItemIndex}
@@ -146,18 +146,6 @@ const PosGrid = () => {
           </Col>
         </Row> */}
       <Footer />
-      <Modal
-        title="Modal 1000px width"
-        centered
-        open={open}
-        onOk={() => setOpen(false)}
-        onCancel={() => setOpen(false)}
-        width={1000}
-      >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
-      </Modal>
     </div>
   );
 };

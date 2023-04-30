@@ -126,7 +126,7 @@ export default function ModalFulfillment() {
           </Dragger>
           <table style={{ width: "100%", border: "0px white solid" }}>
             {ctx.state.uploadfiles != null &&
-              ctx.state.uploadfiles.map((el, index) => (
+              ctx.state.uploadfiles?.map((el, index) => (
                 <tr style={{ border: "0px white solid" }}>
                   <td style={{ border: "0px white solid" }}>
                     <FileOutlined />

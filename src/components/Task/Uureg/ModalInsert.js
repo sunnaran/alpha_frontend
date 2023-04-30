@@ -52,29 +52,29 @@ export default function ModalInsert() {
       myAll = false;
     }
 
-    myConstClass.CONST_SQD_PORT.map((el) => {
+    myConstClass.CONST_SQD_PORT?.map((el) => {
       if (list.includes(el) == false) {
         myPort = false;
       }
     });
-    myConstClass.CONST_SQD_SPECIAL.map((el) => {
+    myConstClass.CONST_SQD_SPECIAL?.map((el) => {
       if (list.includes(el) == false) {
         mySpecial = false;
       }
     });
 
-    myConstClass.CONST_SQD_CENTER.map((el) => {
+    myConstClass.CONST_SQD_CENTER?.map((el) => {
       if (list.includes(el) == false) {
         myCenter = false;
       }
     });
 
-    myConstClass.CONST_SQD_SOUTH.map((el) => {
+    myConstClass.CONST_SQD_SOUTH?.map((el) => {
       if (list.includes(el) == false) {
         mySouth = false;
       }
     });
-    myConstClass.CONST_SQD_NORTH.map((el) => {
+    myConstClass.CONST_SQD_NORTH?.map((el) => {
       if (list.includes(el) == false) {
         myNorth = false;
       }
@@ -303,7 +303,7 @@ export default function ModalInsert() {
               </Dragger>
               <table style={{ width: "100%", border: "0px white solid" }}>
                 {ctx.state.uploadfiles != null &&
-                  ctx.state.uploadfiles.map((el, index) => (
+                  ctx.state.uploadfiles?.map((el, index) => (
                     <tr style={{ border: "0px white solid" }}>
                       <td style={{ border: "0px white solid" }}>
                         <FileOutlined />

@@ -125,7 +125,7 @@ export default function ModalInsert() {
                         ctx.changeStateValue("sqd", value)
                       }
                     >
-                      {myConst.CONST_SQD.map((el) => (
+                      {myConst.CONST_SQD?.map((el) => (
                         <Select.Option key={el} value={el}>
                           {el}
                         </Select.Option>
@@ -181,7 +181,7 @@ export default function ModalInsert() {
                         ctx.changeStateValue("ltp", value)
                       }
                     >
-                      {myConst.CONST_LTP.map((el) => (
+                      {myConst.CONST_LTP?.map((el) => (
                         <Select.Option key={el} value={el}>
                           {el}
                         </Select.Option>
@@ -203,7 +203,7 @@ export default function ModalInsert() {
                         ctx.changeStateValue("mnt", value)
                       }
                     >
-                      {myConst.CONST_MNT.map((el) => (
+                      {myConst.CONST_MNT?.map((el) => (
                         <Select.Option key={el} value={el}>
                           {el}
                         </Select.Option>
@@ -310,7 +310,7 @@ export default function ModalInsert() {
                   </p>
                 </Dragger>
                 <table style={{ width: "100%", border: "0px white solid" }}>
-                  {ctx.state.uploadfiles.map((el, index) => (
+                  {ctx.state.uploadfiles?.map((el, index) => (
                     <tr style={{ border: "0px white solid" }}>
                       <td style={{ border: "0px white solid" }}>
                         <FileOutlined />

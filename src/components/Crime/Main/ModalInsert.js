@@ -212,7 +212,7 @@ export default function ModalInsert() {
                     sessionStorage.getItem("role") == "scr" ? true : false
                   }
                 >
-                  {myConst.CONST_SQD.map((el) => (
+                  {myConst.CONST_SQD?.map((el) => (
                     <Select.Option key={el} value={el}>
                       {el}
                     </Select.Option>
@@ -542,7 +542,7 @@ export default function ModalInsert() {
                 </Dragger>
                 <table style={{ width: "100%", border: "0px white solid" }}>
                   {ctxcrimemain.state.uploadedFiles != null &&
-                    ctxcrimemain.state.uploadedFiles.map((el, index) => (
+                    ctxcrimemain.state.uploadedFiles?.map((el, index) => (
                       <tr style={{ border: "0px white solid" }}>
                         <td style={{ border: "0px white solid" }}>
                           <FileOutlined />
@@ -626,7 +626,7 @@ export default function ModalInsert() {
                         ctxcrimemain.changeStateValue("fp_sqd", value)
                       }
                     >
-                      {myConst.CONST_SQD.map((el) => (
+                      {myConst.CONST_SQD?.map((el) => (
                         <Select.Option key={el} value={el}>
                           {el}
                         </Select.Option>
@@ -700,7 +700,7 @@ export default function ModalInsert() {
                   }
                   required={false}
                 >
-                  {myrank.map((el) => (
+                  {myrank?.map((el) => (
                     <Select.Option key={el} value={el}>
                       {el}
                     </Select.Option>

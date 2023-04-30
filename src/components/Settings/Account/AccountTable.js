@@ -240,7 +240,7 @@ export default function AccountTable() {
           </tr>
         </thead>
         <tbody>
-          {ctx.state.dataList.map((el) => (
+          {ctx.state.dataList?.map((el) => (
 
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr>

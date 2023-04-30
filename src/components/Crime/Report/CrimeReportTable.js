@@ -147,7 +147,7 @@ export default function CrimeReportTable() {
                 }}
               >
                 <Select.Option key={0} value={null}></Select.Option>
-                {myConst.CONST_LTP.map((el) => (
+                {myConst.CONST_LTP?.map((el) => (
                   <Select.Option key={el} value={el}>
                     {el}
                   </Select.Option>
@@ -176,7 +176,7 @@ export default function CrimeReportTable() {
                 }}
               >
                 <Select.Option key={0} value={null}></Select.Option>
-                {myConst.CONST_MNT.map((el) => (
+                {myConst.CONST_MNT?.map((el) => (
                   <Select.Option key={el} value={el}>
                     {el}
                   </Select.Option>
@@ -265,7 +265,7 @@ export default function CrimeReportTable() {
           </tr>
         </thead>
         <tbody>
-          {ctx.state.dataList.map((el) => (
+          {ctx.state.dataList?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr>
                 <td>{el.sqd}</td>
@@ -294,7 +294,7 @@ export default function CrimeReportTable() {
                 </td>
                 <td>
                   {el.uploadfiles != null &&
-                    el.uploadfiles.map((el) => (
+                    el.uploadfiles?.map((el) => (
                       <DownloadFile
                         filename={el.name}
                         bucket={el.bucket}

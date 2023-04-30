@@ -204,7 +204,7 @@ export default function ProductsTable() {
           </tr>
         </thead>
         <tbody>
-          {ctx.state.dataList.map((el) => (
+          {ctx.state.dataList?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
               <tr>
               <td><Space> <Button  onClick={() => ctx.openUpdate(el)} size="small" shape="circle" icon={<EditOutlined />} /> <Button size="small" onClick={() => showDeleteConfirm(el.id)} shape="circle" icon={<DeleteOutlined />} /></Space></td>

@@ -134,7 +134,7 @@ export default function CrimeReportHeader() {
                   ctx.filterData("page_number", "page_number", value)
                 }
               >
-                {ctx.state.listpage.map((el) => (
+                {ctx.state.listpage?.map((el) => (
                   <Option value={el}>{el}</Option>
                 ))}
               </Select>

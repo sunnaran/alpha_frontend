@@ -93,7 +93,7 @@ export default function UuregDetails() {
           </thead>
           <tbody>
             {ctx.state.selectedTaskDetails != null &&
-              ctx.state.selectedTaskDetails.map((el) => (
+              ctx.state.selectedTaskDetails?.map((el) => (
                 <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
                   <tr key={el.id}>
                     <td>
@@ -124,7 +124,7 @@ export default function UuregDetails() {
                     <td>
                       <div style={{ width: "130px" }}>
                         {el.uploadfiles != null &&
-                          el.uploadfiles.map((el) => (
+                          el.uploadfiles?.map((el) => (
                             <DownloadFile
                               filename={el.name}
                               bucket={el.bucket}

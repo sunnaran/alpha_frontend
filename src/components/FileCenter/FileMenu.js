@@ -157,7 +157,7 @@ export default function FileMenu() {
                   ctxfilecenter.changeStateValue("s_page_number", value)
                 }
               >
-                {ctxfilecenter.state.listpage.map((el) => (
+                {ctxfilecenter.state.listpage?.map((el) => (
                   <Option value={el}>{el}</Option>
                 ))}
               </Select>
