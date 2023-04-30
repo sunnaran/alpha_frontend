@@ -34,13 +34,8 @@ export const HuulgaStore = (props) => {
   };
 
   const loadData = () => {
-    setState((state) => ({
-      ...state,
-      filter: false,
-      loading: true,
-      loadingData: true,
-      page_number: 1,
-    }));
+    setState((state) => (initialState));
+    changeStateValue("loading", true);
 
     let messagecode = 127000;
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
@@ -127,14 +122,18 @@ export const HuulgaStore = (props) => {
       token,
       page_size: state.page_size,
       page_number: [name] == "page_number" ? value : state.page_number,
-      trln: state.trln,
-      trl: state.trl,
-      nme: state.nme,
-      ngj: state.ngj,
-      jin: state.jin,
-      sts: state.sts,
-      usr: state.usr,
-      cdt: state.cdt,
+      
+      ognoo: state.ognoo,
+      baraaner: state.baraaner,
+      too: state.too,
+      une: state.une,
+      niitune: state.niitune,
+      ajiltan: state.ajiltan,
+      negj: state.negj,
+      shiree: state.shiree,
+      utga: state.utga,
+      tuluw: state.tuluw,
+      [name]: value,
     };
 
     axios

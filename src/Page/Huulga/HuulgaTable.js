@@ -1,4 +1,4 @@
-import { Table, Input } from "antd";
+import { Table, Input, Select } from "antd";
 import React from "react";
 import "./tableclass.css";
 import { useContext } from "react";
@@ -7,7 +7,12 @@ import MyCurrency from "../../Function/MyCurrency";
 
 export default function HuulgaTable() {
   const ctx = useContext(HuulgaContext);
-
+  const changeNegj = (value) => {
+    ctx.filterData(null, "negj", value);
+  };
+  const changeTuluw = (value) => {
+    ctx.filterData(null, "tuluw", value);
+  };
   return (
     <div
       style={{
@@ -27,11 +32,10 @@ export default function HuulgaTable() {
           }}
         >
           <tr>
-             
             <td>
               <div style={{ maxWidth: "50px", width: "50px" }} />
             </td>
-            <td >
+            <td>
               <div style={{ maxWidth: "50px", width: "50px" }} />
             </td>
             <td>
@@ -63,7 +67,6 @@ export default function HuulgaTable() {
             </td>
           </tr>
           <tr>
-              
             <td>Огноо</td>
             <td>Бараа, бүт нэр</td>
             <td>Тоо</td>
@@ -76,7 +79,6 @@ export default function HuulgaTable() {
             <td>Төлөв</td>
           </tr>
           <tr>
-            
             <td>
               <Input
                 value={ctx.state.ognoo}
@@ -92,23 +94,10 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
-                value={ctx.state.ngj}
+                value={ctx.state.baraaner}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
-                  ctx.changeStateValue("ngj", event.target.value)
-                }
-                onPressEnter={() => {
-                  ctx.changeStateValue("filter", true);
-                  ctx.filterData();
-                }}
-              />
-            </td>
-            <td>
-              <Input
-                value={ctx.state.nme}
-                style={{ margin: "0px", padding: "0px" }}
-                onChange={(event) =>
-                  ctx.changeStateValue("nme", event.target.value)
+                  ctx.changeStateValue("baraaner", event.target.value)
                 }
                 onPressEnter={() => {
                   ctx.changeStateValue("filter", true);
@@ -119,7 +108,7 @@ export default function HuulgaTable() {
             <td>
               <Input
                 value={ctx.state.too}
-                style={{ margin: "0px", padding: "0px", display: "none" }}
+                style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
                   ctx.changeStateValue("too", event.target.value)
                 }
@@ -131,10 +120,10 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
-                value={ctx.state.rng}
+                value={ctx.state.une}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
-                  ctx.changeStateValue("rng", event.target.value)
+                  ctx.changeStateValue("une", event.target.value)
                 }
                 onPressEnter={() => {
                   ctx.changeStateValue("filter", true);
@@ -144,10 +133,10 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
-                value={ctx.state.sts}
+                value={ctx.state.niitune}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
-                  ctx.changeStateValue("sts", event.target.value)
+                  ctx.changeStateValue("niitune", event.target.value)
                 }
                 onPressEnter={() => {
                   ctx.changeStateValue("filter", true);
@@ -157,10 +146,47 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
-                value={ctx.state.usr}
-                style={{ margin: "0px", padding: "0px", display: "none" }}
+                value={ctx.state.ajiltan}
+                style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
-                  ctx.changeStateValue("usr", event.target.value)
+                  ctx.changeStateValue("ajiltan", event.target.value)
+                }
+                onPressEnter={() => {
+                  ctx.changeStateValue("filter", true);
+                  ctx.filterData();
+                }}
+              />
+            </td>
+            <td>
+              <Select
+                size="small"
+                onChange={changeNegj}
+                defaultValue={ctx.state.negj}
+                style={{
+                  width: 120,
+                }}
+                options={[
+                  {
+                    value: null,
+                    label: "Бүгд",
+                  },
+                  {
+                    value: "Баар",
+                    label: "Баар",
+                  },
+                  {
+                    value: "Пааб",
+                    label: "Пааб",
+                  },
+                ]}
+              />
+            </td>
+            <td>
+              <Input
+                value={ctx.state.shiree}
+                style={{ margin: "0px", padding: "0px" }}
+                onChange={(event) =>
+                  ctx.changeStateValue("shiree", event.target.value)
                 }
                 onPressEnter={() => {
                   ctx.changeStateValue("filter", true);
@@ -170,10 +196,10 @@ export default function HuulgaTable() {
             </td>
             <td>
               <Input
-                value={ctx.state.cdt}
+                value={ctx.state.utga}
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
-                  ctx.changeStateValue("cdt", event.target.value)
+                  ctx.changeStateValue("utga", event.target.value)
                 }
                 onPressEnter={() => {
                   ctx.changeStateValue("filter", true);
@@ -182,29 +208,27 @@ export default function HuulgaTable() {
               />
             </td>
             <td>
-              <Input
-                value={ctx.state.cdt}
-                style={{ margin: "0px", padding: "0px" }}
-                onChange={(event) =>
-                  ctx.changeStateValue("cdt", event.target.value)
-                }
-                onPressEnter={() => {
-                  ctx.changeStateValue("filter", true);
-                  ctx.filterData();
+            <Select
+                size="small"
+                onChange={changeTuluw}
+                defaultValue={ctx.state.tuluw}
+                style={{
+                  width: 120,
                 }}
-              />
-            </td>
-            <td>
-              <Input
-                value={ctx.state.cdt}
-                style={{ margin: "0px", padding: "0px" }}
-                onChange={(event) =>
-                  ctx.changeStateValue("cdt", event.target.value)
-                }
-                onPressEnter={() => {
-                  ctx.changeStateValue("filter", true);
-                  ctx.filterData();
-                }}
+                options={[
+                  {
+                    value: null,
+                    label: "Бүгд",
+                  },
+                  {
+                    value: "Зарсан",
+                    label: "Зарсан",
+                  },
+                  {
+                    value: "Таталт",
+                    label: "Таталт",
+                  },
+                ]}
               />
             </td>
           </tr>
