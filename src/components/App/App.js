@@ -21,6 +21,8 @@ import OrlogoGrid from "../../Page/Orlogo/OrlogoGrid";
 import AdminContext, {AdminStore} from "../../context/AdminContext";
 import HuugaGrid from "../../Page/Huulga/HuugaGrid";
 import { HuulgaStore } from "../../Page/Huulga/HuulgaContext";
+import UldegdelGrid from "../../Page/Uldegdel/UldegdelGrid";
+import { UldegdelStore } from "../../Page/Uldegdel/UldegdelContext";
 function App() {
   const { token, setToken } = useToken();
   if (!token) {
@@ -40,6 +42,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Preferences />} />
         <Route exact path="/huulga" element={<HuulgaStore><HuugaGrid /></HuulgaStore>} />
+        <Route exact path="/uldegdel" element={<UldegdelStore><UldegdelGrid/></UldegdelStore>} />
         <Route path="/pos" element={<PosGrid />} />
         <Route path="/baraa" element={<ProductsStore><ProductsGrid/></ProductsStore>} />
         <Route path="/shiree" element={<ShireeStore><ShireeGrid /></ShireeStore>} />
