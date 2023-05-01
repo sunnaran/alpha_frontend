@@ -7,7 +7,7 @@ const BaraaItem = (props) => {
          <Row style={{height: "50px", minwidth: "50px"}} align={"center"}>
             <Col style={{height: "50px"}}>
                 <div style={{height: "50px"}}>
-                <img src={props.zurag==null ? require('../../assets/logo_s.png') : props.zurag} height={45}/>
+                <img src={(props.zurag==null || props.zurag=="null") ? require('../../assets/logo_s.png') : props.zurag} height={45}/>
                 </div>
             {/*  */}
             </Col>

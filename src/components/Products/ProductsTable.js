@@ -243,10 +243,10 @@ export default function ProductsTable() {
               <td
               //  style={{display: "none"}}
               >
-                  {el.pht != null ? (
+                  {(ctx.state?.dataListImages?.find((elphoto)=>elphoto.id==el.id)?.pht != null) ? (
                     <Image
                       height={40}
-                      src={el.pht}
+                      src={ctx.state?.dataListImages?.find((elphoto)=>elphoto.id==el.id)?.pht}
                     />
                   ) : (
                     <img height={40} src={noavatar} />

@@ -6,6 +6,7 @@ const PosContext = React.createContext();
 const initialState = {
   shireenuud: [],
   baraanuud: [],
+  baraanuudImage: [],
   baraaangilal: [],
   total_row: null,
   start_row: null,
@@ -109,6 +110,42 @@ export const PosStore = (props) => {
         message.warning("Алдаа гарлаа 124000");
       });
   };
+
+  const getBaraaImage = () => {
+    const token = JSON.parse(sessionStorage.getItem("token"))?.token;
+    const configload = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        request_code: 124009,
+      },
+    };
+    const data = {
+      token,
+    };    
+    axios
+      .post("/public/request", data, configload)
+      .then((response) => {
+        if (response.data.code == 401) {
+          sessionStorage.clear();
+          window.location.reload(false);
+          message.warning(response.data.message);
+          return;
+        }
+        
+        setState((state) => ({
+          ...state,
+          baraanuudImage: response?.data?.result?.list !=null ? response?.data?.result?.list : [],          
+          loading: false,
+        }));
+      })
+      .catch((error) => {
+        changeStateValue("loading", false);
+        message.warning("Алдаа гарлаа 124009");
+      });
+  };
+
+
 
   const getBaraaAngilal = () => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
@@ -336,6 +373,7 @@ export const PosStore = (props) => {
         state,
         getShiree,
         getBaraa,
+        getBaraaImage,
         getBaraaAngilal,
         changeStateValue,
         addItemToOrder,

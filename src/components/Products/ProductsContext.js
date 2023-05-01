@@ -5,6 +5,7 @@ const ProductsContext = React.createContext();
 const initialState = {
   //data
   dataList: [],
+  dataListImages: [],
   selectedPerson: [],
   // Modal
   showInsert: false,
@@ -100,12 +101,13 @@ export const ProductsStore = (props) => {
   };
 
   const loadAllData = () => {
+    const messagecode = 124000;
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
     const configload = {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-        request_code: 124000,
+        request_code: messagecode,
       },
     };
     const data = {
@@ -143,12 +145,56 @@ export const ProductsStore = (props) => {
           total_page,
           loadingData: false,
         }));
+        if (response.data.code == 200) {
+         loadAllDataImages();
+        }
       })
       .catch((error) => {
         changeStateValue("loadingData", false);
-        message.info("Алдаа гарлаа: code is 123000");
+        message.info("Алдаа гарлаа:"+messagecode);
       });
   };
+
+
+  const loadAllDataImages = () => {
+    const messagecode = 124009;
+    const token = JSON.parse(sessionStorage.getItem("token"))?.token;
+    const configload = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        request_code: messagecode,
+      },
+    };
+    const data = {
+      token,
+      page_size: state.page_size,
+      page_number: 1,
+    };
+    axios
+      .post("/public/request", data, configload)
+      .then((response) => {
+        if (response.data.code == 401) {
+          sessionStorage.clear();
+          window.location.reload(false);
+          message.warning(response.data.message);
+          return;
+        }
+         
+
+        setState((state) => ({
+          ...state,
+          dataListImages:
+            response.data.result.list != null ? response.data.result.list : [],        
+        }));
+      })
+      .catch((error) => {
+        changeStateValue("loadingData", false);
+        message.info("Алдаа гарлаа:"+messagecode);
+      });
+  };
+
+  
 
    
   const filterData = (obj, name, value) => {
@@ -173,6 +219,7 @@ export const ProductsStore = (props) => {
       usr: state.usr,
       cdt: state.cdt, 
     };
+
     changeStateValue("loadingData", true);
     changeStateValue([name], value);
     changeStateValue("filter", true);
@@ -200,12 +247,66 @@ export const ProductsStore = (props) => {
           total_page,
           loadingData: false,
         }));
+        if (response.data.code == 200) {
+          filterDataImages(obj, name, value);
+        }
+
+
       })
       .catch((error) => {
         changeStateValue("loadingData", false);
         message.info("Алдаа гарлаа: code is 124000");
       });
   };
+
+  
+  const filterDataImages = (obj, name, value) => {
+    const token = JSON.parse(sessionStorage.getItem("token"))?.token;
+    const configload = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        request_code: 124009,
+      },
+    };
+    const data = {
+      token,
+      page_size: state.page_size,
+      page_number: state.page_number,
+      trln: state.trln,
+      trl: state.trl,
+      nme: state.nme,
+      ngj: state.ngj,
+      jin: state.jin,
+      sts: state.sts,
+      usr: state.usr,
+      cdt: state.cdt, 
+    };
+    
+     
+    axios
+      .post("/public/request", data, configload)
+      .then((response) => {
+        if (response.data.code == 401) {
+          sessionStorage.clear();
+          window.location.reload(false);
+          message.warning(response.data.message);
+          return;
+        }
+        
+
+        setState((state) => ({
+          ...state,
+          dataListImages:
+            response.data.result.list != null ? response.data.result.list : [],         
+        }));
+      })
+      .catch((error) => {
+        changeStateValue("loadingData", false);
+        message.info("Алдаа гарлаа: code is 124000");
+      });
+  };
+
 
   const deleteData = (id) => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
@@ -282,6 +383,8 @@ export const ProductsStore = (props) => {
       id: el.id,
       pht: el.pht,
       nme: el.nme,
+      une: el.une,
+      urtug: el.urtug,
       ngj: el.ngj,
       jin: el.jin,
       trl: el.trl,
@@ -345,7 +448,8 @@ export const ProductsStore = (props) => {
         deleteData,
         openUpdate,
         closeModal,
-        getBaraaniiTurul
+        getBaraaniiTurul,
+        loadAllDataImages
       }}
     >
       {props.children}

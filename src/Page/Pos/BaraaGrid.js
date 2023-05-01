@@ -14,8 +14,9 @@ import BaraaItem from "./BaraaItem";
 export default function BaraaGrid() {
   const ctx = useContext(PosContext);
   useEffect(() => {
-    ctx.getBaraa();
     ctx.getBaraaAngilal();
+    ctx.getBaraa();        
+    ctx.getBaraaImage();
   }, []);
 
   return (
@@ -70,7 +71,7 @@ export default function BaraaGrid() {
 
           renderItem={(item) => (
             <List.Item onClick={() => ctx.addItemToOrder(item)}>
-              <BaraaItem nme={item.nme} zurag={item.pht} une={item.une} />
+              <BaraaItem nme={item.nme} zurag={ctx.state.baraanuudImage?.find((elimage)=>elimage.id == item.id)?.pht} une={item.une} />
             </List.Item>
           )}
         />

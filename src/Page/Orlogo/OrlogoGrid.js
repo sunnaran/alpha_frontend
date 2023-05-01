@@ -29,7 +29,7 @@ export default function OrlogoGrid() {
   const ctx = useContext(PosContext);
 
   useEffect(() => {
-    ctx.getBaraa();
+    ctx.getBaraa();    
   }, []);
   const [keyboard, setKeyboard] = useState(true);
 
