@@ -65,7 +65,7 @@ export const UuregStore = (props) => {
       state.top == null ||
       state.bdt == null ||
       state.edt == null ||
-      state.checkedList.length == 0
+      state.checkedList?.length == 0
     ) {
       message.error("Талбаруудыг гүйцэт бөглөнө үү");
       return;

@@ -138,7 +138,7 @@ export default function OrlogoGrid() {
         <div>
           <Alert
             message={
-              state.orlogo.length + ` нэр төрлийн ` + getSum() + ` ширхэг `
+              state.orlogo?.length + ` нэр төрлийн ` + getSum() + ` ширхэг `
             }
             type="success"
           />

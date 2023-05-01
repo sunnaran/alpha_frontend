@@ -81,9 +81,9 @@ const PosGrid = () => {
                   overflowY: "scroll",
                 }}
               >
-                {(ctx.state.order
-                  .find(({ shiree }) => shiree === ctx.state.selectedTableId)
-                  ?.items)?.slice().reverse()?.map((el9, index) => (
+                {(ctx.state?.order
+                  ?.find(({ shiree }) => shiree === ctx.state?.selectedTableId)
+                  ?.items)?.slice()?.reverse()?.map((el9, index) => (
                     <OrderItem                      
                       selectedProductID = {ctx.state.selectedProductID}
                       selectedItemIndex = {ctx.state.selectedItemIndex}
@@ -100,7 +100,7 @@ const PosGrid = () => {
               </div>
               <div style={style}>
                 <div style={{ textAlign: "left", fontWeight: "bold" }}>
-                  <MyCurrency>{ctx.state.order.find(({ shiree }) => shiree == ctx.state.selectedTableId)?.totalprice}</MyCurrency>
+                  <MyCurrency>{ctx.state?.order?.find(({ shiree }) => shiree == ctx?.state?.selectedTableId)?.totalprice}</MyCurrency>
 
                 </div>
                 <div>
@@ -129,22 +129,7 @@ const PosGrid = () => {
           </td>
         </tr>
       </table>
-      {/* <Row>
-          <Col flex="453px">
-            <div
-              style={{
-                background: "white",
-                margin: "5px",
-                height: "calc(100vh - 140px)",
-              }}
-            >
-              453
-            </div>
-          </Col>
-          <Col flex="auto">
-            <div style={{ background: "transparent", margin: "5px" }}><BaraaGrid/></div>
-          </Col>
-        </Row> */}
+      
       <Footer />
     </div>
   );

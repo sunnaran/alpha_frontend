@@ -215,7 +215,7 @@ export const CrimeMainStore = (props) => {
       return;
     }
     let new_p_personlist = [];
-    state.p_personlist.length > 0 &&
+    state.p_personlist?.length > 0 &&
       state.p_personlist?.map((el) => {
         new_p_personlist.push(el);
       });
@@ -439,7 +439,7 @@ export const CrimeMainStore = (props) => {
         let total_page = response.data.result.pagination.total_page;
         let selectedperson1 = [];
         if (response.data.result.list != null) {
-          if (response.data.result.list.length > 0) {
+          if (response.data.result.list?.length > 0) {
             selectedperson1 = response.data.result.list[0].person_list;
           }
         }
@@ -506,7 +506,7 @@ export const CrimeMainStore = (props) => {
         let total_page = response.data.result.pagination.total_page;
         let selectedperson1 = [];
         if (response.data.result.list != null) {
-          if (response.data.result.list.length > 0) {
+          if (response.data.result.list?.length > 0) {
             selectedperson1 = response.data.result.list[0].person_list;
           }
         }
@@ -611,7 +611,7 @@ export const CrimeMainStore = (props) => {
 
         let selectedperson1 = [];
         if (response.data.result.list != null) {
-          if (response.data.result.list.length > 0) {
+          if (response.data.result.list?.length > 0) {
             selectedperson1 = response.data.result.list[0].person_list;
           }
         }

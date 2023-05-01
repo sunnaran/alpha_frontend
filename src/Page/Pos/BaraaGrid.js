@@ -21,7 +21,7 @@ export default function BaraaGrid() {
   return (
     <div style={{ width: "100%", height: "calc(100vh - 180px)" }}>
       <Row type="flex">
-        {ctx.state.baraaangilal?.map((el) => (
+        {ctx.state?.baraaangilal?.map((el) => (
           <Col xs={12} sm={8} md={6} lg={4} xl={2} key={el.id}>
             <div
               onClick={()=>ctx.changeStateValue('selectedProductCategory', el.id)}            

@@ -90,13 +90,13 @@ export const PosStore = (props) => {
           message.warning(response.data.message);
           return;
         }
-        let start_row = response.data.result.pagination.start_row;
-        let end_row = response.data.result.pagination.end_row;
-        let total_row = response.data.result.pagination.total_row;
-        let total_page = response.data.result.pagination.total_page;
+        let start_row = response?.data?.result?.pagination?.start_row;
+        let end_row = response?.data?.result?.pagination?.end_row;
+        let total_row = response?.data?.result?.pagination?.total_row;
+        let total_page = response?.data?.result?.pagination?.total_page;
         setState((state) => ({
           ...state,
-          baraanuud: response.data.result.list,
+          baraanuud: response?.data?.result?.list !=null ? response?.data?.result?.list : [],
           total_row,
           start_row,
           end_row,
@@ -223,10 +223,10 @@ export const PosStore = (props) => {
     let myitems = [];
     let olditems = [];
     if (
-      state.order.find(({ shiree }) => shiree == state.selectedTableId)
+      state.order?.find(({ shiree }) => shiree == state.selectedTableId)
         ?.items != null
     ) {
-      olditems = state.order.find(
+      olditems = state?.order?.find(
         ({ shiree }) => shiree == state.selectedTableId
       ).items;
     } else {
@@ -239,7 +239,7 @@ export const PosStore = (props) => {
       });
     }
 
-    let itemlenght = olditems.length;
+    let itemlenght = olditems?.length;
     olditems?.map((el1, index) => {
       if (index == itemlenght - 1) {
         if (el1.itemid == product.id) {

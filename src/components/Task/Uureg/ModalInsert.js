@@ -46,7 +46,7 @@ export default function ModalInsert() {
     let myCenter = true;
     let myNorth = true;
     let mySouth = true;
-    if (list.length === myConstClass.CONST_SQD.length) {
+    if (list?.length === myConstClass.CONST_SQD.length) {
       myAll = true;
     } else {
       myAll = false;
