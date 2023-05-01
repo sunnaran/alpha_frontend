@@ -19,6 +19,8 @@ const initialState = {
   trl_list: [],
   trl: null,
   nme: null,
+  une: null,
+  urtug: null,
   pht: null,
   ngj: null,
   jin: null,
@@ -62,9 +64,12 @@ export const ProductsStore = (props) => {
     const data = {
       token,
       id: state.id,
+
       pht: state.pht,
       trl: state.trl,
       nme: state.nme,
+      une: state.une,
+      urtug: state.urtug,
       ngj: state.ngj,
       jin: state.jin, 
         };

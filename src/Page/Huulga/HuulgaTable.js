@@ -13,6 +13,7 @@ export default function HuulgaTable() {
   const changeTuluw = (value) => {
     ctx.filterData(null, "tuluw", value);
   };
+  let id = 1;
   return (
     <div
       style={{
@@ -242,7 +243,10 @@ export default function HuulgaTable() {
             ?.slice()
             ?.reverse()
             ?.map((el) => (
-              <tr>
+              <tr
+              style={{ backgroundColor: id % 2 == 0 ? "#E6F4FF" : "white" }}
+              key={id++}
+            >
                 <td>{el.ognoo}</td>
                 <td>{el.productname}</td>
                 <td>{el.producttoo}</td>

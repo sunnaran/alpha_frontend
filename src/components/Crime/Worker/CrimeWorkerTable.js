@@ -42,6 +42,7 @@ export default function CrimeWorkerTable() {
       </Menu.Item>
     </Menu>
   );
+  let id=1;
   return (
     <div
       style={{
@@ -102,7 +103,8 @@ export default function CrimeWorkerTable() {
             <td>Бүртгэсэн</td>
             <td>Огноо</td>
           </tr>
-          <tr> <td></td>
+          <tr> 
+            <td></td>
             <td></td>
             <td>
               <Input
@@ -214,7 +216,11 @@ export default function CrimeWorkerTable() {
         <tbody>
           {ctx.state.dataList?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
-              <tr>
+               <tr
+            style={{ backgroundColor: id % 2 == 0 ? "#E6F4FF" : "white" }}
+            key={id++}
+          >
+
               <td><Space> <Button  onClick={() => ctx.openUpdate(el)} size="small" shape="circle" icon={<EditOutlined />} /> <Button size="small" onClick={() => showDeleteConfirm(el.id)} shape="circle" icon={<DeleteOutlined />} /></Space></td>
                 <td>
                   {el.pht != null ? (

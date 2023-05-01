@@ -42,6 +42,7 @@ export default function ShireeTable() {
       </Menu.Item>
     </Menu>
   );
+  let id = 1;
   return (
     <div
       style={{
@@ -200,7 +201,10 @@ export default function ShireeTable() {
         <tbody>
           {ctx.state.dataList?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
-              <tr>
+       <tr
+            style={{ backgroundColor: id % 2 == 0 ? "#E6F4FF" : "white" }}
+            key={id++}
+          >
               <td><Space> <Button  onClick={() => ctx.openUpdate(el)} size="small" shape="circle" icon={<EditOutlined />} /> <Button size="small" onClick={() => showDeleteConfirm(el.id)} shape="circle" icon={<DeleteOutlined />} /></Space></td>
               <td style={{display: "none"}}>
                   {el.pht != null ? (

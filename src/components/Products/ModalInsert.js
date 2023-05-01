@@ -213,6 +213,36 @@ export default function ModalInsert() {
                       }
                     />
                   </Form.Item>
+                  <Form.Item
+                    style={{ marginBottom: "5px" }}
+                    required
+                    label="Зарах үнэ"
+                    hasFeedback
+                    validateStatus={ctx.state.une != null ? "success" : "error"}
+                  >
+                    <Input
+                      allowClear
+                      value={ctx.state.une}
+                      onChange={(event) =>
+                        ctx.changeStateValue("une", event.target.value)
+                      }
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    style={{ marginBottom: "5px" }}
+                    required
+                    label="Өртөг"
+                    hasFeedback
+                    validateStatus={ctx.state.urtug != null ? "success" : "error"}
+                  >
+                    <Input
+                      allowClear
+                      value={ctx.state.urtug}
+                      onChange={(event) =>
+                        ctx.changeStateValue("urtug", event.target.value)
+                      }
+                    />
+                  </Form.Item>
                 </Col>
               </Row>
                 

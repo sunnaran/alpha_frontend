@@ -42,6 +42,7 @@ export default function ProductsTable() {
       </Menu.Item>
     </Menu>
   );
+  let id=1;
   return (
     <div
       style={{
@@ -97,6 +98,8 @@ export default function ProductsTable() {
             >Зураг</td>
             <td>Ангилал</td>
             <td>Нэр</td>
+            <td>Зарах үнэ</td>
+            <td>Өртөг</td>
             <td>Хэмжих нэгж</td>
             <td>Хэмжээ</td>
             <td>Төлөв</td>  
@@ -127,6 +130,32 @@ export default function ProductsTable() {
                 style={{ margin: "0px", padding: "0px" }}
                 onChange={(event) =>
                   ctx.changeStateValue("nme", event.target.value)
+                }
+                onPressEnter={() => {
+                  ctx.changeStateValue("filter", true);
+                  ctx.filterData();
+                }}
+              />
+            </td>
+            <td>
+              <Input
+                value={ctx.state.une}
+                style={{ margin: "0px", padding: "0px" }}
+                onChange={(event) =>
+                  ctx.changeStateValue("une", event.target.value)
+                }
+                onPressEnter={() => {
+                  ctx.changeStateValue("filter", true);
+                  ctx.filterData();
+                }}
+              />
+            </td>
+            <td>
+              <Input
+                value={ctx.state.urtug}
+                style={{ margin: "0px", padding: "0px" }}
+                onChange={(event) =>
+                  ctx.changeStateValue("urtug", event.target.value)
                 }
                 onPressEnter={() => {
                   ctx.changeStateValue("filter", true);
@@ -206,7 +235,10 @@ export default function ProductsTable() {
         <tbody>
           {ctx.state.dataList?.map((el) => (
             <Dropdown overlay={menu(el)} trigger={["contextMenu"]}>
-              <tr>
+              <tr
+            style={{ backgroundColor: id % 2 == 0 ? "#E6F4FF" : "white" }}
+            key={id++}
+          >
               <td><Space> <Button  onClick={() => ctx.openUpdate(el)} size="small" shape="circle" icon={<EditOutlined />} /> <Button size="small" onClick={() => showDeleteConfirm(el.id)} shape="circle" icon={<DeleteOutlined />} /></Space></td>
               <td
               //  style={{display: "none"}}
@@ -225,6 +257,12 @@ export default function ProductsTable() {
                 </td>
                 <td>
                   <MyEllipsis row={2}>{el.nme}</MyEllipsis>
+                </td>
+                <td>
+                  <MyEllipsis row={2}>{el.une}</MyEllipsis>
+                </td>
+                <td>
+                  <MyEllipsis row={2}>{el.urtug}</MyEllipsis>
                 </td>
                     
                 <td>

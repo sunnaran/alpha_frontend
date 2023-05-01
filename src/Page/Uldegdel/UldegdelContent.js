@@ -138,7 +138,7 @@ export default function UldegdelContent() {
         height: "calc(100vh - 180px)",
       }}>
       <table>
-        <tr>
+        <tr style={{backgroundColor: "#E8E9EE"}}>
           <td>№</td>
           <td>Бараа, бүтээгдэхүүний нэр</td>
           <td>Үнэ</td>
