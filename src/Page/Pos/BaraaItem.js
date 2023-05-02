@@ -3,7 +3,7 @@ import {Row, Col} from "antd";
 import MyEllipsis from "../../Function/MyEllipsis";
 const BaraaItem = (props) => {
   return (
-    <div style={{   border: "1px solid #E5E5E7", borderRadius: "5px", backgroundColor: "white",  width: "100px", padding: "5px"  }}>
+    <div style={{   border: "1px solid #E5E5E7", borderRadius: "5px", backgroundColor: "white",  width: "100px", padding: "5px", margin: "5px"  }}>
          <Row style={{height: "50px", minwidth: "50px"}} align={"center"}>
             <Col style={{height: "50px"}}>
                 <div style={{height: "50px"}}>

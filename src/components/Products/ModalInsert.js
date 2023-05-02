@@ -244,8 +244,7 @@ export default function ModalInsert() {
                     />
                   </Form.Item>
                 </Col>
-              </Row>
-                
+              </Row>               
                   
               
                  

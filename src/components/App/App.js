@@ -27,10 +27,14 @@ function App() {
   const { token, setToken } = useToken();
   if (!token) {
     return <>
+     <PosStore>
      <Routes>  
+    
         <Route path="/qrmenu/:id" element={<QrmenuGrid/>} />           
         <Route path="*" element={ <Login setToken={setToken}/> }/>
+        
       </Routes>
+      </PosStore>
     </>
   
   } 

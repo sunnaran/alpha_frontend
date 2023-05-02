@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { Row, Col, Card, List } from "antd";
+import { Row, Col, Card, List, Space } from "antd";
 import PosContext from "./PosContext";
 import {
   HomeOutlined,
@@ -22,8 +22,9 @@ export default function BaraaGrid() {
   return (
     <div style={{ width: "100%", height: "calc(100vh - 180px)" }}>
       <Row type="flex">
-        {ctx.state?.baraaangilal?.map((el) => (
-          <Col xs={12} sm={8} md={6} lg={4} xl={2} key={el.id}>
+      <Space size={[8, 16]} wrap>
+      {ctx.state?.baraaangilal?.map((el) => (
+          
             <div
               onClick={()=>ctx.changeStateValue('selectedProductCategory', el.id)}            
               style={{
@@ -47,17 +48,32 @@ export default function BaraaGrid() {
                 </tr>
               </table>
             </div>
-          </Col>
+          
         ))}
+        </Space>
+        
       </Row>
 
       <div
         style={{
-          overflow: "scroll",
+          overflowX: "scroll",
           height: "calc(100vh - 200px)",
         }}
       >
-        <List
+        <Row>
+            {(ctx.state.selectedProductCategory == 'total' ? ctx.state.baraanuud : ctx.state.baraanuud.filter((el)=>el.trl==ctx.state.selectedProductCategory))
+              ?.map((el9) => (
+                <Space size={[8, 16]} wrap>
+                  <div onClick={() => ctx.addItemToOrder(el9)}>
+                  <BaraaItem nme={el9.nme} zurag={ctx.state.baraanuudImage?.find((elimage)=>elimage.id == el9.id)?.pht} une={el9.une} />
+                  </div>
+              
+                </Space>
+                
+              ))}            
+            </Row>
+            
+        {/* <List
           grid={{
             gutter: 16,
             xs: 2,
@@ -74,7 +90,7 @@ export default function BaraaGrid() {
               <BaraaItem nme={item.nme} zurag={ctx.state.baraanuudImage?.find((elimage)=>elimage.id == item.id)?.pht} une={item.une} />
             </List.Item>
           )}
-        />
+        /> */}
       </div>
     </div>
   );
