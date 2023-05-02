@@ -44,7 +44,7 @@ function App() {
     <AdminStore>
     <PosStore>
         <Routes>
-        <Route path="/" element={<Preferences />} />
+        <Route path="/" element={<HuulgaStore><HuugaGrid /></HuulgaStore>} />
         <Route exact path="/huulga" element={<HuulgaStore><HuugaGrid /></HuulgaStore>} />
         <Route exact path="/uldegdel" element={<UldegdelStore><UldegdelGrid/></UldegdelStore>} />
         <Route path="/pos" element={<PosGrid />} />
