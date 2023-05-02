@@ -8,6 +8,7 @@ const initialState = {
   baraanuud: [],
   baraanuudImage: [],
   baraaangilal: [],
+  listBell: [],
   total_row: null,
   start_row: null,
   end_row: null,
@@ -26,6 +27,31 @@ const initialState = {
 
 export const PosStore = (props) => {
   const [state, setState] = useState(initialState);
+
+  const getBell = () => {
+    const token = JSON.parse(sessionStorage.getItem("token"))?.token;
+    const configload = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        request_code: 190000,
+      },
+    };
+    const data = {
+      token,
+    }; 
+    axios
+      .post("/public/request", data, configload)
+      .then((response) => {        
+        setState((state) => ({
+          ...state,
+          listBell: response?.data?.result?.list,         
+        }));
+      })
+      .catch((error) => {
+       console.log(error);
+      });
+  };
 
   const getShiree = () => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
@@ -68,6 +94,7 @@ export const PosStore = (props) => {
         message.info("Алдаа гарлаа");
       });
   };
+
 
   const getBaraa = () => {
     const token = JSON.parse(sessionStorage.getItem("token"))?.token;
@@ -378,7 +405,7 @@ export const PosStore = (props) => {
         changeStateValue,
         addItemToOrder,
         changePieceOfItem,
-        saveOrder,
+        saveOrder, getBell
       }}
     >
       {props.children}
