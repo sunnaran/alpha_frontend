@@ -18,7 +18,7 @@ export default function Shiree() {
   useEffect(() => {
     const interval = setInterval(() => {
       ctx.getBell();
-    }, 30000);
+    }, 20000);
     return () => clearInterval(interval);
   }, []);
 
